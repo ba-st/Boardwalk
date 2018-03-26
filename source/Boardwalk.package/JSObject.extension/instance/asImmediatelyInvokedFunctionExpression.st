@@ -1,4 +1,4 @@
-*Boardwalk-Javascript
+*Boardwalk
 asImmediatelyInvokedFunctionExpression
 
 	^ (self asFunction apply: #()) addDecoration: JSExpression new
