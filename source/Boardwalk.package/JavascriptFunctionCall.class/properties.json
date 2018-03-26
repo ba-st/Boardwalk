@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MaximilianoTabacman 4/17/2016 10:28",
+	"super" : "JSObject",
+	"category" : "Boardwalk-Javascript",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"functionName",
+		"parameters"
+	],
+	"name" : "JavascriptFunctionCall",
+	"type" : "normal"
+}

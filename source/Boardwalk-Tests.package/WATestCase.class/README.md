@@ -1,0 +1,1 @@
+I'm an abstract test case providing facilities to test Seaside components
