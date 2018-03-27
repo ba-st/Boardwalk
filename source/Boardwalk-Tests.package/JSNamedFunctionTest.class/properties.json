@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "JSObjectTest",
+	"category" : "Boardwalk-Tests-Javascript",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "JSNamedFunctionTest",
+	"type" : "normal"
+}

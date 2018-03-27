@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "GabrielOmarCotelli 1/12/2017 10:15",
 	"super" : "Object",
-	"category" : "Boardwalk-HTML",
+	"category" : "Boardwalk-WebApplication",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

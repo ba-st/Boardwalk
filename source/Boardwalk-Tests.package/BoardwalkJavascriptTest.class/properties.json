@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "GabrielOmarCotelli 3/26/2018 17:06",
-	"super" : "WATestCase",
+	"super" : "JSObjectTest",
 	"category" : "Boardwalk-Tests-Javascript",
 	"classinstvars" : [ ],
 	"pools" : [ ],

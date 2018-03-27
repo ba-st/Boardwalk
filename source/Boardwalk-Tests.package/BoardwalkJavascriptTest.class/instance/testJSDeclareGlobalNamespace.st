@@ -1,8 +1,6 @@
 tests
 testJSDeclareGlobalNamespace
 
-	| jsObject |
-
-	jsObject := JSDeclareGlobalNamespace named: (JSStream on: 'NS').
-
-	self assert: jsObject asJavascript equals: 'var NS'
+	self
+		assert: (self javascript var: 'NS') equals: 'var NS';
+		assert: (self javascript var: (JSStream on: 'NS')) equals: 'var NS'

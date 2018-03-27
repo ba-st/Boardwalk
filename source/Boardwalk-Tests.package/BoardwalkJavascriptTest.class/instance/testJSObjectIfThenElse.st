@@ -3,6 +3,6 @@ testJSObjectIfThenElse
 
 	| jsObject |
 
-	jsObject := (JSStream this equalTo: 0) nonInlinedThen: true else: false.
+	jsObject := self javascript if: (JSStream this equalTo: 0) then: true else: false.
 
-	self assert: jsObject asJavascript equals: 'if(this==0){true} else {false}'
+	self assert: jsObject equals: 'if(this==0){true} else {false}'

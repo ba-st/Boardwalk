@@ -1,8 +1,4 @@
 tests
 testJSObjectSessionStorage
 
-	| jsObject |
-
-	jsObject := JSStream this sessionStorage.
-
-	self assert: jsObject asJavascript equals: 'sessionStorage'
+	self assert: JSStream this sessionStorage equals: 'sessionStorage'

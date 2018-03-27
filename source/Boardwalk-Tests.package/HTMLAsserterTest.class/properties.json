@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "<historical>",
 	"super" : "TestCase",
-	"category" : "Boardwalk-Tests-HTML",
+	"category" : "Boardwalk-Tests-WebApplication",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

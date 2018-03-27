@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "WARenderingTest",
+	"category" : "Boardwalk-Tests-WebApplication",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "WAOnlineLibraryTest",
+	"type" : "normal"
+}

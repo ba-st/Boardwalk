@@ -5,4 +5,4 @@ testJSObjectEqualTo
 
 	jsObject := JSStream this equalTo: 0.
 
-	self assert: jsObject asJavascript equals: 'this==0'
+	self assert: jsObject equals: 'this==0'
