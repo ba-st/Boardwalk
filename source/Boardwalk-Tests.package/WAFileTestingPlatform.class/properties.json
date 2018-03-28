@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "GabrielOmarCotelli 7/3/2017 14:29",
+	"super" : "GRPlatform",
+	"category" : "Boardwalk-Tests-WebApplication",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"platform",
+		"createdFolders",
+		"createdFiles"
+	],
+	"name" : "WAFileTestingPlatform",
+	"type" : "normal"
+}

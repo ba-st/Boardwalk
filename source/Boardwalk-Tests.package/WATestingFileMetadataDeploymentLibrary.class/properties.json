@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GabrielOmarCotelli 4/18/2017 11:24",
+	"super" : "WATestingFileMetadataLibrary",
+	"category" : "Boardwalk-Tests-WebApplication",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "WATestingFileMetadataDeploymentLibrary",
+	"type" : "normal"
+}

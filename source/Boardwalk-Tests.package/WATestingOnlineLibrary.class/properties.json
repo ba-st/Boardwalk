@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GabrielOmarCotelli 3/27/2018 13:52",
+	"super" : "WAOnlineLibrary",
+	"category" : "Boardwalk-Tests-WebApplication",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "WATestingOnlineLibrary",
+	"type" : "normal"
+}
