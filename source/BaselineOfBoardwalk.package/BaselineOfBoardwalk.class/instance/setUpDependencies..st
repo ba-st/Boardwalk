@@ -9,4 +9,4 @@ setUpDependencies: spec
 			with: [ spec
 				repository: 'github://SeasideSt/Seaside:v3.2.4/repository';
 				loads: #('Seaside-Environment' 'Javascript' 'Zinc') ];
-		project: 'Seaside3-Tests' copyFrom: 'Seaside3' with: [ spec loads: #('Seaside-Tests-Core') ]
+		project: 'Seaside3-Tests' copyFrom: 'Seaside3' with: [ spec loads: #('Seaside-Tests-Core' 'Javascript-Tests-Core') ]
