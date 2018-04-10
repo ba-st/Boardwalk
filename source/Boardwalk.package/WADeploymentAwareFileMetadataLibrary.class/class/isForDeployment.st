@@ -1,4 +1,4 @@
 Testing
 isForDeployment
 
-	^ self subclassResponsibility
+	^ self forDeployment = self
