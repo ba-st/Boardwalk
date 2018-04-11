@@ -1,4 +1,4 @@
 Testing
 isForDevelopment
 
-	^self isForDeployment not
+	^ self forDevelopment = self
