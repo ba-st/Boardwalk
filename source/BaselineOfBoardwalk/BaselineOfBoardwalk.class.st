@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfBoardwalk,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfBoardwalk'
+	#category : #BaselineOfBoardwalk
 }
 
 { #category : #baselines }
@@ -24,7 +24,7 @@ BaselineOfBoardwalk >> baseline: spec [
 BaselineOfBoardwalk >> setUpDependencies: spec [
 
 	spec
-		baseline: 'Buoy' with: [ spec repository: 'github://ba-st/Buoy:v3.1.0/source' ];
+		baseline: 'Buoy' with: [ spec repository: 'github://ba-st/Buoy:v4.0.0/source' ];
 		import: 'Buoy'.
 	spec
 		baseline: 'Seaside3'
