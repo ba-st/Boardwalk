@@ -1,1 +1,0 @@
-I'm an unit test for Javascript extensions
