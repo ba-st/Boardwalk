@@ -1,4 +1,0 @@
-tests
-testForDeployment
-
-	self assert: WATestingFileMetadataLibrary forDeployment equals: WATestingFileMetadataDeploymentLibrary

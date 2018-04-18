@@ -1,4 +1,0 @@
-*Boardwalk
-isForDeployment
-
-	^true
