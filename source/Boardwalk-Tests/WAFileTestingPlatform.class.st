@@ -152,6 +152,7 @@ WAFileTestingPlatform >> newline [
 { #category : #exceptions }
 WAFileTestingPlatform >> openDebuggerOn: anError [
 
+	<ignoreForCoverage>
 	^ platform openDebuggerOn: anError
 ]
 
@@ -214,6 +215,7 @@ WAFileTestingPlatform >> semaphoreClass [
 { #category : #exceptions }
 WAFileTestingPlatform >> stackDepth [
 
+	<ignoreForCoverage>
 	^ platform stackDepth
 ]
 
