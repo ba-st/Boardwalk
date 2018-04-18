@@ -73,7 +73,27 @@ BoardwalkJavascriptTest >> testJSObjectIfThenElse [
 ]
 
 { #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectNotIdenticalTo [
+
+	| jsObject |
+
+	jsObject := JSStream this notIdenticalTo: 0.
+
+	self assert: jsObject equals: 'this!==0'
+]
+
+{ #category : #tests }
 BoardwalkJavascriptTest >> testJSObjectSessionStorage [
 
 	self assert: JSStream this sessionStorage equals: 'sessionStorage'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectTypeOf [
+
+	| jsObject |
+
+	jsObject := JSStream undefined typeOf.
+
+	self assert: jsObject equals: 'typeof undefined'
 ]

@@ -43,7 +43,24 @@ JSObject >> nonInlinedThen: anObject else: anotherObject [
 ]
 
 { #category : #'*Boardwalk' }
+JSObject >> notIdenticalTo: anObject [
+
+	self
+		addDecoration:
+			(JSBinary new
+				operator: '!==';
+				statement: anObject)
+]
+
+{ #category : #'*Boardwalk' }
 JSObject >> sessionStorage [
 
 	^self alias: 'sessionStorage'
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> typeOf [
+    "Returns the type of the receiver."
+
+    self addDecoration: JSTypeOf new
 ]
