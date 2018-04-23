@@ -15,6 +15,23 @@ WARenderingTest class >> isAbstract [
 	^self name = #WARenderingTest
 ]
 
+{ #category : #asserting }
+WARenderingTest >> assertFileDeploymentOf: fileMetadataLibrary createsAsFolders: expectedFolders andFileContentsMatching: expectedFilesMetadata [
+
+	"expectedFilesMetadata MUST be a collection of associations with key = expectedFilePath and value = expectedFileContentsHash"
+
+	self
+		useFileTestingPlatformDuring: [ | expectedFiles hashByFile |
+
+			fileMetadataLibrary deployFiles.
+			expectedFiles := expectedFilesMetadata asArray collect: [ :fileMetadata | fileMetadata key ].
+			hashByFile := expectedFilesMetadata asDictionary.
+			self
+				assert: GRPlatform current createdFolders equals: expectedFolders asArray;
+				assert: GRPlatform current createdFiles equals: expectedFiles.
+			hashByFile keysAndValuesDo: [ :file :hash | self assert: (GRPlatform current savedHashFor: file)  equals: hash ] ]
+]
+
 { #category : #utility }
 WARenderingTest >> builder [
 
@@ -49,4 +66,15 @@ WARenderingTest >> render: aRenderable [
 WARenderingTest >> renderUsing: aMonadycBlock [
 
 	^ self builder render: [ :canvas | aMonadycBlock cull: canvas ]
+]
+
+{ #category : #utility }
+WARenderingTest >> useFileTestingPlatformDuring: aBlock [
+
+	| installedPlatform |
+
+	installedPlatform := GRPlatform current.
+	[ GRPlatform current: (WAFileTestingPlatform wrapping: installedPlatform).
+	aBlock value ]
+		ensure: [ GRPlatform current: installedPlatform ]
 ]

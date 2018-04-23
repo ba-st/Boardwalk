@@ -3,9 +3,51 @@ A WillowFileMetadataLibraryTest is a test class for testing the behavior of Will
 "
 Class {
 	#name : #WADeploymentAwareFileMetadataLibraryTest,
-	#superclass : #TestCase,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#superclass : #WARenderingTest,
+	#category : #'Boardwalk-Tests-WebApplication'
 }
+
+{ #category : #tests }
+WADeploymentAwareFileMetadataLibraryTest >> testDeployFiles [
+
+	self
+		assertFileDeploymentOf: WATestingFileMetadataDeploymentLibrary default
+		createsAsFolders: #('testing-0.0.0' 'testing-0.0.0/js')
+		andFileContentsMatching: {('testing-0.0.0/js/undefined.js' -> 'd5d4cd07616a542891b7ec2d0257b3a24b69856e')}
+]
+
+{ #category : #tests }
+WADeploymentAwareFileMetadataLibraryTest >> testDeployFilesWhenFileNotMatches [
+
+	self
+		should: [ self
+				assertFileDeploymentOf: WATestingFileMetadataDeploymentLibrary default
+				createsAsFolders: #('testing-0.0.0/js')
+				andFileContentsMatching: {('testing-0.0.0/js/undefinedBad.js' -> 'd5d4cd07616a542891b7ec2d0257b3a24b69856e')} ]
+		raise: self class classForTestResult failure
+]
+
+{ #category : #tests }
+WADeploymentAwareFileMetadataLibraryTest >> testDeployFilesWhenFolderIsMissing [
+
+	self
+		should: [ self
+				assertFileDeploymentOf: WATestingFileMetadataDeploymentLibrary default
+				createsAsFolders: #('testing-0.0.0/js')
+				andFileContentsMatching: {('testing-0.0.0/js/undefined.js' -> 'd5d4cd07616a542891b7ec2d0257b3a24b69856e')} ]
+		raise: self class classForTestResult failure
+]
+
+{ #category : #tests }
+WADeploymentAwareFileMetadataLibraryTest >> testDeployFilesWithInvalidHash [
+
+	self
+		should: [ self
+				assertFileDeploymentOf: WATestingFileMetadataDeploymentLibrary default
+				createsAsFolders: #('testing-0.0.0' 'testing-0.0.0/js')
+				andFileContentsMatching: {('testing-0.0.0/js/undefined.js' -> '000000000000000000000')} ]
+		raise: self class classForTestResult failure
+]
 
 { #category : #tests }
 WADeploymentAwareFileMetadataLibraryTest >> testForDeployment [
@@ -28,7 +70,7 @@ WADeploymentAwareFileMetadataLibraryTest >> testHandlesFolder [
 { #category : #tests }
 WADeploymentAwareFileMetadataLibraryTest >> testJavascriptGeneration [
 
-	self assert: WATestingFileMetadataDeploymentLibrary default contentJs equals: 'undefined'
+	self assert: WATestingFileMetadataDeploymentLibrary default jsUndefinedJsContent equals: 'undefined'
 ]
 
 { #category : #tests }
