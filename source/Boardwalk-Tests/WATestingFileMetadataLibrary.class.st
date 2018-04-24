@@ -32,7 +32,17 @@ WATestingFileMetadataLibrary class >> version [
 ]
 
 { #category : #accesing }
-WATestingFileMetadataLibrary >> contentJs [
+WATestingFileMetadataLibrary >> jsUndefinedJs [
+
+	^ WAFileLibraryResource
+		filepath: 'js/undefined.js'
+		mimeType: WAMimeType textJavascript
+		cacheDuration: self class defaultCacheDuration
+		contents: (GRDelayedSend receiver: self selector: #jsUndefinedJsContent)
+]
+
+{ #category : #accesing }
+WATestingFileMetadataLibrary >> jsUndefinedJsContent [
 
 	^ self javascriptContentFrom: [ :js | js << JSStream undefined ]
 ]

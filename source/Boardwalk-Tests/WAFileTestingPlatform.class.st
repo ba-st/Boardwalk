@@ -7,9 +7,10 @@ Class {
 	#instVars : [
 		'platform',
 		'createdFolders',
-		'createdFiles'
+		'createdFiles',
+		'hashByFile'
 	],
-	#category : 'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #Configuring }
@@ -112,7 +113,8 @@ WAFileTestingPlatform >> initializeWrapping: aGRPlatform [
 
 	platform := aGRPlatform.
 	createdFolders := GRSmallOrderedSet new.
-	createdFiles := SortedCollection new
+	createdFiles := SortedCollection new.
+	hashByFile := GRSmallDictionary new.
 ]
 
 { #category : #processes }
@@ -198,6 +200,12 @@ WAFileTestingPlatform >> removeSelector: aSymbol from: aClass [
 	^ platform removeSelector: aSymbol from: aClass
 ]
 
+{ #category : #accessing }
+WAFileTestingPlatform >> savedHashFor: aFilePath [
+
+	^ hashByFile at: aFilePath ifAbsent: [ TestResult resumableFailure signal: ('Hash not found for <1s>. Please review the changes in the metadata library under test' expandMacrosWith: aFilePath) ]
+]
+
 { #category : #cryptography }
 WAFileTestingPlatform >> secureHashFor: aString [
 
@@ -236,5 +244,9 @@ WAFileTestingPlatform >> weakDictionaryOfSize: aNumber [
 { #category : #'file library' }
 WAFileTestingPlatform >> write: aStringOrByteArray toFile: aFileNameString inFolder: aFolderString [
 
-	createdFiles add: ('<1s>/<2s>' expandMacrosWith: aFolderString with: aFileNameString)
+	| filePathString |
+
+	filePathString := '<1s>/<2s>' expandMacrosWith: aFolderString with: aFileNameString.
+	createdFiles add: filePathString.
+	hashByFile at: filePathString put: (self secureHashFor: aStringOrByteArray) hex
 ]

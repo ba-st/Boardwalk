@@ -23,6 +23,15 @@ WABoardwalkExtensionsTest >> testFormDoNotSubmit [
 ]
 
 { #category : #tests }
+WABoardwalkExtensionsTest >> testFullDocumentRendering [
+
+	self
+		assert: (self fullDocumentRendering: WATestingRootComponent new)
+		equals:
+			'<html><head><title>Hello</title></head><body onload="onLoad()">Hello world!<script type="text/javascript">function onLoad(){};</script></body></html>'
+]
+
+{ #category : #tests }
 WABoardwalkExtensionsTest >> testTagBrushClasses [
 
 	| html |
