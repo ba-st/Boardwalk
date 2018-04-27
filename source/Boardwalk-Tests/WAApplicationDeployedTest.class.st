@@ -4,7 +4,7 @@ A WillowApplicationDeployedTest is a test class for testing the behavior of Will
 Class {
 	#name : #WAApplicationDeployedTest,
 	#superclass : #TestCase,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #'tests-accessing' }

@@ -4,7 +4,7 @@ A WAOnlineLibraryTest is a test class for testing the behavior of WAOnlineLibrar
 Class {
 	#name : #WAOnlineLibraryTest,
 	#superclass : #WARenderingTest,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #tests }

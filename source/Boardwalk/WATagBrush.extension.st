@@ -13,3 +13,9 @@ WATagBrush >> identifier [
 		ifNil: [ AssertionFailed signal: 'The identifier was never assigned' ]
 		ifNotNil: [ :id | id ]
 ]
+
+{ #category : #'*Boardwalk' }
+WATagBrush >> identifyIn: aCanvas [
+
+	self ensureId 
+]

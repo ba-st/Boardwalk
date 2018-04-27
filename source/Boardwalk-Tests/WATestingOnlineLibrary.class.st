@@ -4,7 +4,7 @@ I'm a library for testing purposes
 Class {
 	#name : #WATestingOnlineLibrary,
 	#superclass : #WAOnlineLibrary,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #Updating }

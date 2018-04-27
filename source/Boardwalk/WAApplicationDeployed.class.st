@@ -4,7 +4,7 @@ I represent a Willow Application as deployed.
 Class {
 	#name : #WAApplicationDeployed,
 	#superclass : #WADeploymentMode,
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #accessing }

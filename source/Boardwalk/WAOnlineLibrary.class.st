@@ -4,7 +4,7 @@ I'm a library serving files for an online location. Just redefine updateRoot: an
 Class {
 	#name : #WAOnlineLibrary,
 	#superclass : #WAObject,
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #accessing }

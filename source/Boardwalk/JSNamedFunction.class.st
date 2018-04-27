@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'name'
 	],
-	#category : 'Boardwalk-Javascript'
+	#category : #'Boardwalk-Javascript'
 }
 
 { #category : #'instance creation' }

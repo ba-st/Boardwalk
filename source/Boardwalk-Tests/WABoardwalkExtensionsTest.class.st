@@ -4,7 +4,7 @@ I'm a test of Seaside extensions
 Class {
 	#name : #WABoardwalkExtensionsTest,
 	#superclass : #WARenderingTest,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #tests }
@@ -50,6 +50,19 @@ WABoardwalkExtensionsTest >> testTagBrushIdentifier [
 			div := canvas div.
 			self should: [ div identifier ] raise: AssertionFailed.
 			canvas ensureIdFor: div.
+			self shouldnt: [ div identifier ] raise: AssertionFailed ]
+]
+
+{ #category : #tests }
+WABoardwalkExtensionsTest >> testTagBrushIdentifyIn [
+
+	self
+		render: [ :canvas | 
+			| div |
+
+			div := canvas div.
+			self should: [ div identifier ] raise: AssertionFailed.
+			div identifyIn: canvas.
 			self shouldnt: [ div identifier ] raise: AssertionFailed ]
 ]
 

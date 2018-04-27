@@ -8,7 +8,7 @@ Class {
 		'prefix',
 		'identifierHolder'
 	],
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #'Instance Creation' }
