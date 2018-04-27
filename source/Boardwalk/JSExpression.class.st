@@ -4,7 +4,7 @@ A JS expression enclosed in parenthesis
 Class {
 	#name : #JSExpression,
 	#superclass : #JSDecoration,
-	#category : 'Boardwalk-Javascript'
+	#category : #'Boardwalk-Javascript'
 }
 
 { #category : #printing }

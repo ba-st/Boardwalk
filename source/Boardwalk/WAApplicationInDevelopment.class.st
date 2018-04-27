@@ -4,7 +4,7 @@ I represent a Willow Application in development.
 Class {
 	#name : #WAApplicationInDevelopment,
 	#superclass : #WADeploymentMode,
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #accessing }

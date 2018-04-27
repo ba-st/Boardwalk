@@ -4,7 +4,7 @@ I'm an unit test for Javascript extensions
 Class {
 	#name : #BoardwalkJavascriptTest,
 	#superclass : #JSObjectTest,
-	#category : 'Boardwalk-Tests-Javascript'
+	#category : #'Boardwalk-Tests-Javascript'
 }
 
 { #category : #tests }

@@ -8,7 +8,7 @@ Class {
 		'trueStatement',
 		'falseStatementOptional'
 	],
-	#category : 'Boardwalk-Javascript'
+	#category : #'Boardwalk-Javascript'
 }
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ A HTMLAsserterTest is a test class for testing the behavior of HTMLAsserter
 Class {
 	#name : #HTMLAsserterTest,
 	#superclass : #TestCase,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #'tests-Asserting' }

@@ -4,7 +4,7 @@ I have the responsibility to provide assertions for HTML related aspects.
 Class {
 	#name : #HTMLAsserter,
 	#superclass : #Object,
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #Asserting }

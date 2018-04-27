@@ -4,7 +4,7 @@ A NamedJavascriptFunctionTest is a test class for testing the behavior of NamedJ
 Class {
 	#name : #JSNamedFunctionTest,
 	#superclass : #JSObjectTest,
-	#category : 'Boardwalk-Tests-Javascript'
+	#category : #'Boardwalk-Tests-Javascript'
 }
 
 { #category : #'tests-printing' }

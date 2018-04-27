@@ -8,7 +8,7 @@ Class {
 		'libraries',
 		'baseUrlForLibraryOptional'
 	],
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #'private-Installing' }

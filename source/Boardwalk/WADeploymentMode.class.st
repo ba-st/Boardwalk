@@ -4,7 +4,7 @@ I represent a Willow Application Deployment mode. Currently I help in filtering 
 Class {
 	#name : #WADeploymentMode,
 	#superclass : #Object,
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #accessing }
