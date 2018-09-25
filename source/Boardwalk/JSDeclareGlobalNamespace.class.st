@@ -4,7 +4,7 @@ A Javascript variable declaration
 Class {
 	#name : #JSDeclareGlobalNamespace,
 	#superclass : #JSMember,
-	#category : #'Boardwalk-Javascript'
+	#category : 'Boardwalk-Javascript'
 }
 
 { #category : #printing }

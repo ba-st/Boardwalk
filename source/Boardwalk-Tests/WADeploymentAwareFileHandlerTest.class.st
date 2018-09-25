@@ -4,7 +4,7 @@ A WillowFileHandlerTest is a test class for testing the behavior of WillowFileHa
 Class {
 	#name : #WADeploymentAwareFileHandlerTest,
 	#superclass : #TestCase,
-	#category : #'Boardwalk-Tests-WebApplication'
+	#category : 'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #private }

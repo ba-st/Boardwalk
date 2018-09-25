@@ -4,7 +4,7 @@ A WillowApplicationInDevelopmentTest is a test class for testing the behavior of
 Class {
 	#name : #WAApplicationInDevelopmentTest,
 	#superclass : #TestCase,
-	#category : #'Boardwalk-Tests-WebApplication'
+	#category : 'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #'tests-accessing' }

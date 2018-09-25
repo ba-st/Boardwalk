@@ -8,7 +8,7 @@ Class {
 		'functionName',
 		'parameters'
 	],
-	#category : #'Boardwalk-Javascript'
+	#category : 'Boardwalk-Javascript'
 }
 
 { #category : #'instance creation' }

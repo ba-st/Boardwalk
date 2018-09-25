@@ -4,7 +4,7 @@ I'm a test of Seaside extensions
 Class {
 	#name : #WABoardwalkExtensionsTest,
 	#superclass : #WARenderingTest,
-	#category : #'Boardwalk-Tests-WebApplication'
+	#category : 'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #tests }

@@ -1,7 +1,7 @@
 Class {
 	#name : #IdentifierAssignerTest,
 	#superclass : #TestCase,
-	#category : #'Boardwalk-Tests-WebApplication'
+	#category : 'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #'test support' }

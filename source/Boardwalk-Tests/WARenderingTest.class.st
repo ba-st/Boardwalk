@@ -4,7 +4,7 @@ I'm an abstract test case providing facilities to test Seaside components
 Class {
 	#name : #WARenderingTest,
 	#superclass : #WAContextTest,
-	#category : #'Boardwalk-Tests-WebApplication'
+	#category : 'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #testing }

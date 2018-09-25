@@ -4,7 +4,7 @@ Test support library
 Class {
 	#name : #WATestingFileMetadataLibrary,
 	#superclass : #WADeploymentAwareFileMetadataLibrary,
-	#category : #'Boardwalk-Tests-WebApplication'
+	#category : 'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #Accessing }

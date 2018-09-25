@@ -4,7 +4,7 @@ A JavascriptFunctionCallTest is a test class for testing the behavior of Javascr
 Class {
 	#name : #JSFunctionCallTest,
 	#superclass : #JSObjectTest,
-	#category : #'Boardwalk-Tests-Javascript'
+	#category : 'Boardwalk-Tests-Javascript'
 }
 
 { #category : #'tests-printing' }
