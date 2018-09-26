@@ -4,7 +4,7 @@ I'm an abstract metadata library, allowing my subclasses to declare what name to
 Class {
 	#name : #WADeploymentAwareFileMetadataLibrary,
 	#superclass : #WAFileMetadataLibrary,
-	#category : #'Boardwalk-WebApplication'
+	#category : 'Boardwalk-WebApplication'
 }
 
 { #category : #Accessing }

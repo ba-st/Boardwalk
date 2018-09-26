@@ -4,7 +4,7 @@ I'm an unit test for Javascript extensions
 Class {
 	#name : #BoardwalkJavascriptTest,
 	#superclass : #JSObjectTest,
-	#category : #'Boardwalk-Tests-Javascript'
+	#category : 'Boardwalk-Tests-Javascript'
 }
 
 { #category : #tests }
@@ -23,6 +23,16 @@ BoardwalkJavascriptTest >> testJSObjectAsImmediatelyInvokedFunctionExpression [
 	jsObject := (JSStream this equalTo: 0) asImmediatelyInvokedFunctionExpression.
 
 	self assert: jsObject equals: '(function(){this==0}())'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectCollect [
+
+	| jsObject |
+
+	jsObject := JSStream this collect: [:currentValue | currentValue access: 'value' ].
+
+	self assert: jsObject equals: 'this.map(function(currentValue){return currentValue.value})'
 ]
 
 { #category : #tests }
@@ -73,6 +83,16 @@ BoardwalkJavascriptTest >> testJSObjectIfThenElse [
 ]
 
 { #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectMultiply [
+
+	| jsObject |
+
+	jsObject := JSStream this * 100.
+
+	self assert: jsObject equals: 'this*100'
+]
+
+{ #category : #tests }
 BoardwalkJavascriptTest >> testJSObjectNotIdenticalTo [
 
 	| jsObject |
@@ -80,6 +100,19 @@ BoardwalkJavascriptTest >> testJSObjectNotIdenticalTo [
 	jsObject := JSStream this notIdenticalTo: 0.
 
 	self assert: jsObject equals: 'this!==0'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectSelect [
+
+	| jsObject |
+
+	jsObject := JSStream this
+		select: [ :currentValue | (currentValue access: 'value') equalTo: JSStream undefined ].
+
+	self
+		assert: jsObject
+		equals: 'this.filter(function(currentValue){return currentValue.value==undefined})'
 ]
 
 { #category : #tests }
