@@ -1,7 +1,7 @@
 <p align="center"><img src="assets/logos/100x100.png">
  <h1 align="center">Boardwalk</h1>
   <p align="center">
-    A couple of facilities on top of the [Seaside Web Framework](https://github.com/SeasideSt/Seaside)
+    A couple of facilities on top of the <a href="https://github.com/SeasideSt/Seaside">Seaside Web Framework</a>
     <br>
     <a href="docs/"><strong>Explore the docs »</strong></a>
     <br>
