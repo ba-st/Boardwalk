@@ -10,7 +10,7 @@ Class {
 		'createdFiles',
 		'hashByFile'
 	],
-	#category : #'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-SUnit'
 }
 
 { #category : #Configuring }
