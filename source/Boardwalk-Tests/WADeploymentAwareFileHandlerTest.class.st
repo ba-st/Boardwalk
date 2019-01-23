@@ -17,7 +17,8 @@ WADeploymentAwareFileHandlerTest >> changeRegisteredFileHandlerDuring: aBlock [
 
 	aBlock
 		ensure: [ WAFileHandler default: installedHandler.
-			WAAdmin defaultDispatcher register: installedHandler at: 'files' ]
+			WADispatcher default register: installedHandler at: 'files'
+			]
 ]
 
 { #category : #'tests-accessing' }
