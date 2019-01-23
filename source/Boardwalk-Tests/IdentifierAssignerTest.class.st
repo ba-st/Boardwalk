@@ -30,13 +30,16 @@ IdentifierAssignerTest >> testAssignedIdentifierWhenNotAssigned [
 	self
 		should: [ assigner assignedIdentifier ]
 		raise: AssertionFailed
-		withExceptionDo: [ :error | self assert: error messageText equals: 'The identifier was never assigned' ]
+		withMessageText: 'The identifier was never assigned'
 ]
 
 { #category : #test }
 IdentifierAssignerTest >> testPrefixCantBeEmpty [
 
-	self should: [ IdentifierAssigner prefixedBy: '' ] raise: InstanceCreationFailed withExceptionDo: [ :error | self assert: error messageText equals: 'The supplied prefix cannot be empty' ]
+	self
+		should: [ IdentifierAssigner prefixedBy: '' ]
+		raise: InstanceCreationFailed
+		withMessageText: 'The supplied prefix cannot be empty'
 ]
 
 { #category : #test }

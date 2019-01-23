@@ -19,7 +19,7 @@ HTMLAsserterTest >> testAssertingEmptyString [
 	self
 		should: [ HTMLAsserter new assertIsValidIdentifier: '' ]
 		raise: AssertionFailed
-		withExceptionDo: [ :exception | self assert: exception messageText equals: 'An id attribute can''t be empty' ]
+		withMessageText: 'An id attribute can''t be empty'
 ]
 
 { #category : #tests }
@@ -28,8 +28,7 @@ HTMLAsserterTest >> testAssertingInvalidString [
 	self
 		should: [ HTMLAsserter new assertIsValidIdentifier: '1/aaa' ]
 		raise: AssertionFailed
-		withExceptionDo:
-			[ :exception | self assert: exception messageText equals: 'An id attribute must begin with a letter. The id contains an unsafe character' ]
+		withMessageText: 'An id attribute must begin with a letter. The id contains an unsafe character'
 ]
 
 { #category : #tests }
@@ -38,6 +37,5 @@ HTMLAsserterTest >> testAssertingStringStartingWithSafeCharacterButNotALetter [
 	self
 		should: [ HTMLAsserter new assertIsValidIdentifier: '1id' ]
 		raise: AssertionFailed
-		withExceptionDo:
-			[ :exception | self assert: exception messageText equals: 'An id attribute must begin with a letter' ]
+		withMessageText: 'An id attribute must begin with a letter'
 ]

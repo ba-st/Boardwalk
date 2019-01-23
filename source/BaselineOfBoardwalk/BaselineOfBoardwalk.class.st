@@ -9,27 +9,41 @@ BaselineOfBoardwalk >> baseline: spec [
 
 	<baseline>
 	spec
-		for: #common
-		do: [ self setUpDependencies: spec.
+		for: #pharo
+		do: [ self
+				setUpDependencies: spec;
+				baselineBoardwalk: spec.
 			spec
-				package: 'Boardwalk' with: [ spec requires: #('Buoy' 'Seaside3') ];
-				package: 'Boardwalk-Tests' with: [ spec requires: #('Seaside3-Tests' 'Boardwalk') ].
-			spec
-				group: 'Deployment' with: #('Boardwalk');
-				group: 'Development' with: #('Deployment' 'Boardwalk-Tests');
-				group: 'default' with: #('Deployment') ]
+				group: 'CI' with: 'Tests';
+				group: 'Tools' with: 'Buoy-Tools';
+				group: 'Development' with: #('Tests' 'Tools')
+			]
+]
+
+{ #category : #baselines }
+BaselineOfBoardwalk >> baselineBoardwalk: spec [
+
+	spec
+		package: 'Boardwalk' with: [ spec requires: #('Buoy-Deployment' 'Seaside3-Javascript') ];
+		group: 'Deployment' with: 'Boardwalk';
+		package: 'Boardwalk-Tests'
+			with: [ spec requires: #('Seaside3-Javascript-Tests' 'Boardwalk' 'Buoy-SUnit') ];
+		group: 'Tests' with: 'Boardwalk-Tests'
 ]
 
 { #category : #baselines }
 BaselineOfBoardwalk >> setUpDependencies: spec [
 
 	spec
-		baseline: 'Buoy' with: [ spec repository: 'github://ba-st/Buoy:v4/source' ];
-		import: 'Buoy'.
+		baseline: 'Buoy' with: [ spec repository: 'github://ba-st/Buoy:v5/source' ];
+		project: 'Buoy-Deployment' copyFrom: 'Buoy' with: [ spec loads: 'Deployment' ];
+		project: 'Buoy-SUnit' copyFrom: 'Buoy' with: [ spec loads: 'Dependent-SUnit-Extensions' ];
+		project: 'Buoy-Tools' copyFrom: 'Buoy' with: [ spec loads: 'Tools' ].
+
 	spec
-		baseline: 'Seaside3'
-			with: [ spec
-				repository: 'github://SeasideSt/Seaside:v3.2.4/repository';
-				loads: #('Seaside-Environment' 'Javascript' 'Zinc') ];
-		project: 'Seaside3-Tests' copyFrom: 'Seaside3' with: [ spec loads: #('Seaside-Tests-Core' 'Javascript-Tests-Core') ]
+		baseline: 'Seaside3' with: [ spec repository: 'github://SeasideSt/Seaside:v3.3.1/repository' ];
+		project: 'Seaside3-Javascript' copyFrom: 'Seaside3' with: [ spec loads: #('Javascript' 'Zinc') ];
+		project: 'Seaside3-Javascript-Tests'
+			copyFrom: 'Seaside3'
+			with: [ spec loads: 'Javascript Tests' ]
 ]

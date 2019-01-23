@@ -15,7 +15,7 @@ Class {
 WADeploymentAwareFileHandler class >> install: fileHandler [
 
 	WAFileHandler default: fileHandler.
-	WAAdmin defaultDispatcher register: fileHandler at: 'files'.
+	WADispatcher default register: fileHandler at: 'files'.
 	^ fileHandler
 ]
 
