@@ -26,9 +26,17 @@ BaselineOfBoardwalk >> baselineBoardwalk: spec [
 	spec
 		package: 'Boardwalk' with: [ spec requires: #('Buoy-Deployment' 'Seaside3-Javascript') ];
 		group: 'Deployment' with: 'Boardwalk';
-		package: 'Boardwalk-Tests'
+		package: 'Boardwalk-SUnit'
 			with: [ spec requires: #('Seaside3-Javascript-Tests' 'Boardwalk' 'Buoy-SUnit') ];
+		group: 'Dependent-SUnit-Extensions' with: 'Boardwalk-SUnit';
+		package: 'Boardwalk-Tests' with: [ spec requires: 'Boardwalk-SUnit' ];
 		group: 'Tests' with: 'Boardwalk-Tests'
+]
+
+{ #category : #accessing }
+BaselineOfBoardwalk >> projectClass [
+
+	^ MetacelloCypressBaselineProject
 ]
 
 { #category : #baselines }
