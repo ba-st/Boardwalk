@@ -33,15 +33,15 @@ JSNamedFunction >> javascriptContentOn: aStream [
 JSNamedFunction >> javascriptFunctionBodyOn: aStream [
 
 	aStream nextPut: ${.
-	statements isEmpty
-		ifFalse: [ statements allButLast
-				do: [ :each | 
-					aStream
-						javascript: each;
-						nextPut: $; ].
-			self return
-				ifTrue: [ aStream nextPutAll: 'return ' ].
-			aStream javascript: statements last ].
+	[ statements allButLast
+		do: [ :each | 
+			aStream
+				javascript: each;
+				nextPut: $;
+			].
+	self return then: [ aStream nextPutAll: 'return ' ].
+	aStream javascript: statements last
+	] unless: statements isEmpty.
 	aStream nextPut: $}
 ]
 
