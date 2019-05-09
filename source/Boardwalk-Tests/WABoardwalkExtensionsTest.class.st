@@ -3,8 +3,8 @@ I'm a test of Seaside extensions
 "
 Class {
 	#name : #WABoardwalkExtensionsTest,
-	#superclass : #WARenderingTest,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#superclass : #BWRenderingTest,
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #tests }

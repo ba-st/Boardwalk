@@ -3,7 +3,7 @@ I'm a test for WAFileTestingPlatform
 "
 Class {
 	#name : #WAFileTestingPlatformTest,
-	#superclass : #WARenderingTest,
+	#superclass : #BWRenderingTest,
 	#instVars : [
 		'testingPlatform'
 	],

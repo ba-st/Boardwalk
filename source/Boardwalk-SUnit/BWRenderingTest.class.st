@@ -2,21 +2,21 @@
 I'm an abstract test case providing facilities to test Seaside components
 "
 Class {
-	#name : #WARenderingTest,
+	#name : #BWRenderingTest,
 	#superclass : #WAContextTest,
 	#category : #'Boardwalk-SUnit'
 }
 
 { #category : #testing }
-WARenderingTest class >> isAbstract [
-	"Override to true if a TestCase subclass is Abstract and should not have
-	TestCase instances built from it"
+BWRenderingTest class >> isAbstract [
 
-	^self name = #WARenderingTest
+	^ self name = #BWRenderingTest
 ]
 
 { #category : #asserting }
-WARenderingTest >> assertFileDeploymentOf: fileMetadataLibrary createsAsFolders: expectedFolders andFileContentsMatching: expectedFilesMetadata [
+BWRenderingTest >> assertFileDeploymentOf: fileMetadataLibrary
+	createsAsFolders: expectedFolders
+	andFileContentsMatching: expectedFilesMetadata [
 
 	"expectedFilesMetadata MUST be a collection of associations with key = expectedFilePath and value = expectedFileContentsHash"
 
@@ -29,11 +29,13 @@ WARenderingTest >> assertFileDeploymentOf: fileMetadataLibrary createsAsFolders:
 			self
 				assert: GRPlatform current createdFolders equals: expectedFolders asArray;
 				assert: GRPlatform current createdFiles equals: expectedFiles.
-			hashByFile keysAndValuesDo: [ :file :hash | self assert: (GRPlatform current savedHashFor: file)  equals: hash ] ]
+			hashByFile
+				keysAndValuesDo: [ :file :hash | self assert: ( GRPlatform current savedHashFor: file ) equals: hash ]
+			]
 ]
 
 { #category : #utility }
-WARenderingTest >> builder [
+BWRenderingTest >> builder [
 
 	^ WAHtmlCanvas builder
 		fullDocument: false;
@@ -42,13 +44,13 @@ WARenderingTest >> builder [
 ]
 
 { #category : #utility }
-WARenderingTest >> createCodec [
+BWRenderingTest >> createCodec [
 
 	^ GRPharoUtf8Codec new
 ]
 
 { #category : #utility }
-WARenderingTest >> fullDocumentRendering: aWARootComponent [
+BWRenderingTest >> fullDocumentRendering: aWARootComponent [
 
 	^ self builder
 		fullDocument: true;
@@ -57,24 +59,25 @@ WARenderingTest >> fullDocumentRendering: aWARootComponent [
 ]
 
 { #category : #utility }
-WARenderingTest >> render: aRenderable [
+BWRenderingTest >> render: aRenderable [
 
 	^ self renderUsing: [ :canvas | canvas render: aRenderable ]
 ]
 
 { #category : #utility }
-WARenderingTest >> renderUsing: aMonadycBlock [
+BWRenderingTest >> renderUsing: aMonadycBlock [
 
 	^ self builder render: [ :canvas | aMonadycBlock cull: canvas ]
 ]
 
 { #category : #utility }
-WARenderingTest >> useFileTestingPlatformDuring: aBlock [
+BWRenderingTest >> useFileTestingPlatformDuring: aBlock [
 
 	| installedPlatform |
 
 	installedPlatform := GRPlatform current.
-	[ GRPlatform current: (WAFileTestingPlatform wrapping: installedPlatform).
-	aBlock value ]
+	[ GRPlatform current: ( WAFileTestingPlatform wrapping: installedPlatform ).
+	aBlock value
+	]
 		ensure: [ GRPlatform current: installedPlatform ]
 ]

@@ -3,7 +3,7 @@ A WillowFileMetadataLibraryTest is a test class for testing the behavior of Will
 "
 Class {
 	#name : #WADeploymentAwareFileMetadataLibraryTest,
-	#superclass : #WARenderingTest,
+	#superclass : #BWRenderingTest,
 	#category : #'Boardwalk-Tests-WebApplication'
 }
 
