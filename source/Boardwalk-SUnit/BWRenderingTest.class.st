@@ -18,6 +18,7 @@ BWRenderingTest >> assertFileDeploymentOf: fileMetadataLibrary
 	createsAsFolders: expectedFolders
 	andFileContentsMatching: expectedFilesMetadata [
 
+
 	"expectedFilesMetadata MUST be a collection of associations with key = expectedFilePath and value = expectedFileContentsHash"
 
 	self
@@ -30,7 +31,11 @@ BWRenderingTest >> assertFileDeploymentOf: fileMetadataLibrary
 				assert: GRPlatform current createdFolders equals: expectedFolders asArray;
 				assert: GRPlatform current createdFiles equals: expectedFiles.
 			hashByFile
-				keysAndValuesDo: [ :file :hash | self assert: ( GRPlatform current savedHashFor: file ) equals: hash ]
+				keysAndValuesDo: [ :file :hash | 
+					self
+						assert: ( '<1s>: <2s>' expandMacrosWith: file with: ( GRPlatform current savedHashFor: file ) )
+						equals: ( '<1s>: <2s>' expandMacrosWith: file with: hash )
+					]
 			]
 ]
 
