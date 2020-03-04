@@ -4,7 +4,7 @@ I'm an abstract metadata library, allowing my subclasses to declare what name to
 Class {
 	#name : #WADeploymentAwareFileMetadataLibrary,
 	#superclass : #WAFileMetadataLibrary,
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #Accessing }
@@ -59,14 +59,20 @@ WADeploymentAwareFileMetadataLibrary class >> version [
 WADeploymentAwareFileMetadataLibrary >> javascriptContentFrom: aMonadycBlock [
 
 	WACurrentRequestContext
-		use: (WARequestContext request: WARequest new response: WABufferedResponse new)
+		use: ( WARequestContext request: WARequest new response: WABufferedResponse new )
 		during: [ WAHtmlCanvas builder
 				fullDocument: false;
 				render: [ :canvas | 
-					| javascript |
-					javascript := canvas javascript.
-					aMonadycBlock cull: javascript.
-					^ javascript greaseString ] ]
+					canvas requestContext
+						push: WARequestHandler new
+						during: [ | javascript |
+
+							javascript := canvas javascript.
+							aMonadycBlock cull: javascript.
+							^ javascript greaseString
+							]
+					]
+			]
 ]
 
 { #category : #testing }
