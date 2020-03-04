@@ -6,9 +6,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'prefix',
-		'identifierHolder'
+		'identifierOptional'
 	],
-	#category : 'Boardwalk-WebApplication'
+	#category : #'Boardwalk-WebApplication'
 }
 
 { #category : #'Instance Creation' }
@@ -22,7 +22,7 @@ IdentifierAssigner class >> prefixedBy: aPrefix [
 { #category : #Accessing }
 IdentifierAssigner >> assignedIdentifier [
 
-	^ identifierHolder
+	^ identifierOptional
 		withContentDo: [ :id | id ]
 		ifUnused: [ :explanations | AssertionFailed signalAll: explanations ]
 ]
@@ -30,13 +30,13 @@ IdentifierAssigner >> assignedIdentifier [
 { #category : #Configuring }
 IdentifierAssigner >> identifyIn: aCanvas [
 
-	^ identifierHolder
+	^ identifierOptional
 		withContentDo: [ :identifier | identifier ]
 		ifUnused: [ | identifier |
 
 			identifier := '<1s>-<2s>' expandMacrosWith: prefix greaseString with: aCanvas nextId greaseString.
 			HTMLAsserter new assertIsValidIdentifier: identifier.
-			identifierHolder := Optional containing: identifier.
+			identifierOptional := Optional containing: identifier.
 			identifier ]
 ]
 
@@ -44,11 +44,11 @@ IdentifierAssigner >> identifyIn: aCanvas [
 IdentifierAssigner >> initializePrefixedBy: aPrefix [
 
 	prefix := aPrefix.
-	identifierHolder := Optional unusedBecause: 'The identifier was never assigned'
+	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'
 ]
 
 { #category : #Accessing }
 IdentifierAssigner >> withAssignedIdentifierDo: aMonadycBlock [
 
-	identifierHolder withContentDo: aMonadycBlock 
+	identifierOptional withContentDo: aMonadycBlock 
 ]

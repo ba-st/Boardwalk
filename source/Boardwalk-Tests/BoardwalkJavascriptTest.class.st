@@ -4,7 +4,7 @@ I'm an unit test for Javascript extensions
 Class {
 	#name : #BoardwalkJavascriptTest,
 	#superclass : #JSObjectTest,
-	#category : 'Boardwalk-Tests-Javascript'
+	#category : #'Boardwalk-Tests-Javascript'
 }
 
 { #category : #tests }
@@ -46,6 +46,16 @@ BoardwalkJavascriptTest >> testJSObjectEqualTo [
 ]
 
 { #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectGreaterThan [
+
+	| jsObject |
+
+	jsObject := JSStream this greaterThan: 0.
+
+	self assert: jsObject equals: 'this>0'
+]
+
+{ #category : #tests }
 BoardwalkJavascriptTest >> testJSObjectIdenticalTo [
 
 	| jsObject |
@@ -83,6 +93,36 @@ BoardwalkJavascriptTest >> testJSObjectIfThenElse [
 ]
 
 { #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectLGreaterThanOrEqualTo [
+
+	| jsObject |
+
+	jsObject := JSStream this greaterThanOrEqualTo: 0.
+
+	self assert: jsObject equals: 'this>=0'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectLLessThanOrEqualTo [
+
+	| jsObject |
+
+	jsObject := JSStream this lessThanOrEqualTo: 0.
+
+	self assert: jsObject equals: 'this<=0'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectLessThan [
+
+	| jsObject |
+
+	jsObject := JSStream this lessThan: 0.
+
+	self assert: jsObject equals: 'this<0'
+]
+
+{ #category : #tests }
 BoardwalkJavascriptTest >> testJSObjectMultiply [
 
 	| jsObject |
@@ -90,6 +130,16 @@ BoardwalkJavascriptTest >> testJSObjectMultiply [
 	jsObject := JSStream this * 100.
 
 	self assert: jsObject equals: 'this*100'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectNotEqualTo [
+
+	| jsObject |
+
+	jsObject := JSStream this notEqualTo: 0.
+
+	self assert: jsObject equals: 'this!=0'
 ]
 
 { #category : #tests }

@@ -40,6 +40,26 @@ JSObject >> equalTo: anObject [
 ]
 
 { #category : #'*Boardwalk' }
+JSObject >> greaterThan: anObject [
+
+	self
+		addDecoration:
+			( JSBinary new
+				operator: '>';
+				statement: anObject )
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> greaterThanOrEqualTo: anObject [
+
+	self
+		addDecoration:
+			( JSBinary new
+				operator: '>=';
+				statement: anObject )
+]
+
+{ #category : #'*Boardwalk' }
 JSObject >> identicalTo: anObject [
 
 	self
@@ -47,6 +67,26 @@ JSObject >> identicalTo: anObject [
 			(JSBinary new
 				operator: '===';
 				statement: anObject)
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> lessThan: anObject [
+
+	self
+		addDecoration:
+			( JSBinary new
+				operator: '<';
+				statement: anObject )
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> lessThanOrEqualTo: anObject [
+
+	self
+		addDecoration:
+			( JSBinary new
+				operator: '<=';
+				statement: anObject )
 ]
 
 { #category : #'*Boardwalk' }
@@ -63,6 +103,16 @@ JSObject >> nonInlinedThen: anObject else: anotherObject [
 			(JSNonInlinedIfThenElse new
 				trueStatement: anObject;
 				falseStatement: anotherObject)
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> notEqualTo: anObject [
+
+	self
+		addDecoration:
+			( JSBinary new
+				operator: '!=';
+				statement: anObject )
 ]
 
 { #category : #'*Boardwalk' }
