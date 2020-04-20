@@ -29,6 +29,14 @@ JSArrowFunctionTest >> script [
 ]
 
 { #category : #tests }
+JSArrowFunctionTest >> testAsArrowFunction [
+
+	self
+		assert: ( 'a.example()' asArrowFunction: #(a) ) asArrowFunction equals: '(a) => {a.example()}';
+		assert: 'example()' asArrowFunction asArrowFunction equals: '() => {example()}'
+]
+
+{ #category : #tests }
 JSArrowFunctionTest >> testAsFunction [
 
 	self
