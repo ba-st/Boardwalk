@@ -10,7 +10,7 @@ Class {
 	#category : #'Boardwalk-WebApplication'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 WAFileMetadataLibraryDeployer class >> deployingAll: libraryFactories [
 
 	^ self new initializeDeployingAll: libraryFactories
