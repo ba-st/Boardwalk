@@ -19,8 +19,6 @@ jobs:
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         timeout-minutes: 15
       - run: env
-      - run: ls -la /home/runner/.smalltalkCI/_builds
-      - run: ls -la ${{ env.HOME }}/.smalltalkCI/_builds  
       - name: Upload coverage to Codecov  
         uses: codecov/codecov-action@v1.0.6
         with:
