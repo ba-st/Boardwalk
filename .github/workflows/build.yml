@@ -16,6 +16,6 @@ jobs:
       - uses: ba-st-actions/setup-smalltalkCI@v2.2.0
         with:
           smalltalk-version: ${{ matrix.smalltalk }}
-      - run: echo ${GITHUB_ACTION}
+      - run: env
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         timeout-minutes: 15
