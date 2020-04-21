@@ -18,9 +18,9 @@ jobs:
           smalltalk-version: ${{ matrix.smalltalk }}
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         timeout-minutes: 15
-      - run: ls -la ${HOME}
+      - run: ls -la ${HOME}/.smalltalkCI/_builds/coveralls_results.json
       - name: Upload coverage to Codecov  
         uses: codecov/codecov-action@v1.0.6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ${HOME}/.smalltalkCI/_builds/coveralls_results.json
+          file: ${{ env.HOME }}/.smalltalkCI/_builds/coveralls_results.json
