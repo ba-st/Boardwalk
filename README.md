@@ -14,7 +14,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/ba-st/Boardwalk.svg)](https://github.com/ba-st/Boardwalk/releases/latest)
 ![Build Status](https://github.com/ba-st/Boardwalk/workflows/Build/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/ba-st/Boardwalk/badge.svg?branch=release-candidate)](https://coveralls.io/github/ba-st/Boardwalk?branch=release-candidate)
+[![Coverage Status](https://codecov.io/github/ba-st/Boardwalk/coverage.svg?branch=release-candidate)](https://codecov.io/gh/ba-st/Boardwalk/branch/release-candidate)
 
 ## License
 - The code is licensed under [MIT](LICENSE).
