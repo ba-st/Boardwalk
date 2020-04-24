@@ -1,6 +1,14 @@
 Extension { #name : #JSScript }
 
 { #category : #'*Boardwalk' }
+JSScript >> asVariableName: aVariableName [
+
+	^ aVariableName isString
+		ifTrue: [ JSStream on: aVariableName ]
+		ifFalse: [ aVariableName ]
+]
+
+{ #category : #'*Boardwalk' }
 JSScript >> call: aFunctionName [
 
 	^ self call: aFunctionName withArguments: #()
@@ -33,6 +41,12 @@ JSScript >> call: aFunctionName withArguments: anArray [
 ]
 
 { #category : #'*Boardwalk' }
+JSScript >> const: aVariableName assign: anObject [
+
+	^ JSDeclareConstVariable named: ( ( self asVariableName: aVariableName ) assign: anObject )
+]
+
+{ #category : #'*Boardwalk' }
 JSScript >> if: condition then: statement [
 
 	^ condition nonInlinedThen: statement
@@ -47,9 +61,5 @@ JSScript >> if: condition then: trueStatement else: falseStatement [
 { #category : #'*Boardwalk' }
 JSScript >> var: aVariableName [
 
-	^ JSDeclareGlobalNamespace
-		named:
-			(aVariableName isString
-				ifTrue: [ JSStream on: aVariableName ]
-				ifFalse: [ aVariableName ])
+	^ JSDeclareGlobalNamespace named: ( self asVariableName: aVariableName )
 ]

@@ -8,7 +8,8 @@ Class {
 		'platform',
 		'createdFolders',
 		'createdFiles',
-		'hashByFile'
+		'hashByFile',
+		'contentsByFileOptional'
 	],
 	#category : #'Boardwalk-SUnit'
 }
@@ -115,6 +116,7 @@ WAFileTestingPlatform >> initializeWrapping: aGRPlatform [
 	createdFolders := GRSmallOrderedSet new.
 	createdFiles := SortedCollection new.
 	hashByFile := GRSmallDictionary new.
+	contentsByFileOptional := Optional unused
 ]
 
 { #category : #processes }
@@ -179,6 +181,12 @@ WAFileTestingPlatform >> readWriteCharacterStream [
 	^ platform readWriteCharacterStream
 ]
 
+{ #category : #initialization }
+WAFileTestingPlatform >> recordFileContents [
+
+	contentsByFileOptional := Optional containing: Dictionary new
+]
+
 { #category : #startup }
 WAFileTestingPlatform >> removeFromShutDownList: anObject [
 
@@ -198,6 +206,22 @@ WAFileTestingPlatform >> removeSelector: aSymbol from: aClass [
 
 	<ignoreForCoverage>
 	^ platform removeSelector: aSymbol from: aClass
+]
+
+{ #category : #accessing }
+WAFileTestingPlatform >> savedContentsFor: aFilePath [
+
+	^ contentsByFileOptional
+		withContentDo: [ :contentsByFile | 
+			contentsByFile
+				at: aFilePath
+				ifAbsent: [ TestResult resumableFailure
+						signal:
+							( 'File not found for <1s>. Please review the changes in the metadata library under test'
+								expandMacrosWith: aFilePath )
+					]
+			]
+		ifUnused: [ TestResult failure signal: 'File content recording was not activated. Send #recordFileContents' ]
 ]
 
 { #category : #accessing }
@@ -248,5 +272,7 @@ WAFileTestingPlatform >> write: aStringOrByteArray toFile: aFileNameString inFol
 
 	filePathString := '<1s>/<2s>' expandMacrosWith: aFolderString with: aFileNameString.
 	createdFiles add: filePathString.
-	hashByFile at: filePathString put: (self secureHashFor: aStringOrByteArray) hex
+	hashByFile at: filePathString put: ( self secureHashFor: aStringOrByteArray ) hex.
+	contentsByFileOptional
+		withContentDo: [ :contentsByFile | contentsByFile at: filePathString put: aStringOrByteArray ]
 ]

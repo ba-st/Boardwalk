@@ -8,6 +8,16 @@ Class {
 }
 
 { #category : #tests }
+BoardwalkJavascriptTest >> testJSDeclareConstVariable [
+
+	self
+		assert: ( self javascript const: 'variable' assign: ( JSFunctionCall for: #example ) )
+			equals: 'const variable=example()';
+		assert: ( self javascript const: ( JSStream on: 'variable' ) assign: JSStream this )
+			equals: 'const variable=this'
+]
+
+{ #category : #tests }
 BoardwalkJavascriptTest >> testJSDeclareGlobalNamespace [
 
 	self
@@ -32,7 +42,70 @@ BoardwalkJavascriptTest >> testJSObjectCollect [
 
 	jsObject := JSStream this collect: [:currentValue | currentValue access: 'value' ].
 
-	self assert: jsObject equals: 'this.map(function(currentValue){return currentValue.value})'
+	self assert: jsObject equals: 'this.map((currentValue) => {return currentValue.value})'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectDetect [
+
+	| jsObject |
+
+	jsObject := JSStream this
+		detect: [ :currentValue | ( currentValue access: 'value' ) equalTo: JSStream undefined ].
+
+	self assert: jsObject equals: 'this.find((currentValue) => {return currentValue.value==undefined})'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectDetectIfFound [
+
+	| jsObject |
+
+	jsObject := JSStream this
+		detect: [ :currentValue | ( currentValue access: 'value' ) notEqualTo: 99 ]
+		ifFound: [ :foundValue :script | script << ( foundValue access: 'value' ) ].
+
+	self
+		assert: jsObject
+		equals:
+			'if((foundValue=this.find((currentValue) => {return currentValue.value!=99}))!=undefined){foundValue.value}'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectDetectIfFoundIfNone [
+
+	| jsObject |
+
+	jsObject := JSStream this
+		detect: [ :currentValue | ( currentValue access: 'value' ) notEqualTo: 99 ]
+		ifFound: [ :foundValue :script | script << ( foundValue access: 'value' ) ]
+		ifNone: [ :script | 
+			script << ( ( JSStream on: 'console' ) call: 'log' with: 'Doh!' ).
+			script << 8
+			].
+
+	self
+		assert: jsObject
+		equals:
+			'if((foundValue=this.find((currentValue) => {return currentValue.value!=99}))!=undefined){foundValue.value} else {console.log("Doh!");8}'
+]
+
+{ #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectDetectIfNone [
+
+	| jsObject |
+
+	jsObject := JSStream this
+		detect: [ :currentValue | ( currentValue access: 'value' ) notEqualTo: 99 ]
+		ifNone: [ :script | 
+			script << ( ( JSStream on: 'console' ) call: 'log' with: 'Doh!' ).
+			script << 8
+			].
+
+	self
+		assert: jsObject
+		equals:
+			'if((foundValue=this.find((currentValue) => {return currentValue.value!=99}))==undefined){console.log("Doh!");8}'
 ]
 
 { #category : #tests }
@@ -162,7 +235,7 @@ BoardwalkJavascriptTest >> testJSObjectSelect [
 
 	self
 		assert: jsObject
-		equals: 'this.filter(function(currentValue){return currentValue.value==undefined})'
+		equals: 'this.filter((currentValue) => {return currentValue.value==undefined})'
 ]
 
 { #category : #tests }

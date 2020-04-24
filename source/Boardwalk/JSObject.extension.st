@@ -12,6 +12,12 @@ JSObject >> * anObject [
 ]
 
 { #category : #'*Boardwalk' }
+JSObject >> asExpression [
+
+	self addDecoration: JSExpression new
+]
+
+{ #category : #'*Boardwalk' }
 JSObject >> asImmediatelyInvokedFunctionExpression [
 
 	^ (self asFunction apply: #()) addDecoration: JSExpression new
@@ -23,10 +29,84 @@ JSObject >> collect: aBlock [
 	self
 		call: 'map'
 		with:
-			(((aBlock value: (JSStream on: 'currentValue'))
-				asFunction: (Array with: 'currentValue'))
+			( ( ( aBlock value: ( JSStream on: 'currentValue' ) ) asArrowFunction: #('currentValue') )
 				return: true;
-				yourself)
+				yourself )
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> detect: aBlock [
+
+	self
+		call: 'find'
+		with:
+			( ( ( aBlock value: ( JSStream on: 'currentValue' ) ) asArrowFunction: #('currentValue') )
+				return: true;
+				yourself )
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> detect: aBlock ifFound: foundBlock [
+
+	| thenScript |
+
+	thenScript := self javascript.
+	foundBlock value: ( JSStream on: 'foundValue' ) value: thenScript.
+
+	^ self javascript
+		if:
+			( ( ( JSStream on: 'foundValue' )
+				assign:
+					( self
+						call: 'find'
+						with:
+							( ( ( aBlock value: ( JSStream on: 'currentValue' ) ) asArrowFunction: #('currentValue') )
+								return: true;
+								yourself ) ) ) asExpression notEqualTo: JSStream undefined )
+		then: thenScript
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> detect: aBlock ifFound: foundBlock ifNone: errorBlock [
+
+	| thenScript elseScript |
+
+	thenScript := self javascript.
+	elseScript := self javascript.
+	foundBlock value: ( JSStream on: 'foundValue' ) value: thenScript.
+	errorBlock value: elseScript.
+	^ self javascript
+		if:
+			( ( ( JSStream on: 'foundValue' )
+				assign:
+					( self
+						call: 'find'
+						with:
+							( ( ( aBlock value: ( JSStream on: 'currentValue' ) ) asArrowFunction: #('currentValue') )
+								return: true;
+								yourself ) ) ) asExpression notEqualTo: JSStream undefined )
+		then: thenScript
+		else: elseScript
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> detect: aBlock ifNone: errorBlock [
+
+	| thenScript |
+
+	thenScript := self javascript.
+	errorBlock value: thenScript.
+	^ self javascript
+		if:
+			( ( ( JSStream on: 'foundValue' )
+				assign:
+					( self
+						call: 'find'
+						with:
+							( ( ( aBlock value: ( JSStream on: 'currentValue' ) ) asArrowFunction: #('currentValue') )
+								return: true;
+								yourself ) ) ) asExpression equalTo: JSStream undefined )
+		then: thenScript
 ]
 
 { #category : #'*Boardwalk' }
@@ -67,6 +147,14 @@ JSObject >> identicalTo: anObject [
 			(JSBinary new
 				operator: '===';
 				statement: anObject)
+]
+
+{ #category : #'*Boardwalk' }
+JSObject >> javascript [
+
+	^ ( JSScript context: self renderContext )
+		rendererClass: self rendererClass;
+		yourself
 ]
 
 { #category : #'*Boardwalk' }
@@ -131,10 +219,9 @@ JSObject >> select: aBlock [
 	self
 		call: 'filter'
 		with:
-			(((aBlock value: (JSStream on: 'currentValue'))
-				asFunction: (Array with: 'currentValue'))
+			( ( ( aBlock value: ( JSStream on: 'currentValue' ) ) asArrowFunction: #('currentValue') )
 				return: true;
-				yourself)
+				yourself )
 ]
 
 { #category : #'*Boardwalk' }

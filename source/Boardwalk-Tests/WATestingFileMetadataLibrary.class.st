@@ -4,7 +4,7 @@ Test support library
 Class {
 	#name : #WATestingFileMetadataLibrary,
 	#superclass : #WADeploymentAwareFileMetadataLibrary,
-	#category : 'Boardwalk-Tests-WebApplication'
+	#category : #'Boardwalk-Tests-WebApplication'
 }
 
 { #category : #Accessing }
@@ -37,8 +37,13 @@ WATestingFileMetadataLibrary >> jsUndefinedJs [
 	^ WAFileLibraryResource
 		filepath: 'js/undefined.js'
 		mimeType: WAMimeType textJavascript
-		cacheDuration: self class defaultCacheDuration
-		contents: (GRDelayedSend receiver: self selector: #jsUndefinedJsContent)
+		cacheDuration:
+			( Duration
+				days: 0
+				hours: 0
+				minutes: 1
+				seconds: 0 )
+		contents: ( GRDelayedSend receiver: self selector: #jsUndefinedJsContent )
 ]
 
 { #category : #accesing }
