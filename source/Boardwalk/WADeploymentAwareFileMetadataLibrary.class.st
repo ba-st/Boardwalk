@@ -28,7 +28,7 @@ WADeploymentAwareFileMetadataLibrary class >> addFileNamed: filename contents: a
 { #category : #Accessing }
 WADeploymentAwareFileMetadataLibrary class >> defaultCacheDuration [
 
-	"Since this libraries are intended to be immutable including the version 
+	"Since these libraries are intended to be immutable including the version 
 	in the path to serve we can cache the responses the maximum allowed time"
 
 	^ Duration seconds: 31536000
