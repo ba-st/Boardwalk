@@ -40,7 +40,7 @@ WAFileMetadataLibraryDeployerTest >> testDeployFilesMetadata [
 				parse: ( GRPlatform current savedContentsFor: './libraries-metadata.json' ).
 			self
 				assert: ( parsedContents at: 'filePath' ) equals: 'testing-0.0.0/js/undefined.js';
-				assert: ( parsedContents at: 'mediaType' ) equals: 'text/javascript';
+				assert: ( parsedContents at: 'mediaType' ) equals: 'application/javascript';
 				assert: ( parsedContents at: 'cacheDurationInMs' ) equals: 60000
 			]
 ]

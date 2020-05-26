@@ -36,7 +36,7 @@ WATestingFileMetadataLibrary >> jsUndefinedJs [
 
 	^ WAFileLibraryResource
 		filepath: 'js/undefined.js'
-		mimeType: WAMimeType textJavascript
+		mimeType: WAMimeType applicationJavascript
 		cacheDuration:
 			( Duration
 				days: 0
