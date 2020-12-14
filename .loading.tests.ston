@@ -3,14 +3,14 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'Boardwalk',
       #directory : 'source',
-      #load : [ 'CI' ],
+      #load : [ 'Tests' ],
       #platforms : [  #pharo ]
     }
   ],
   #testing : {
     #coverage : {
-       #packages : [ 'Boardwalk*' ],
+      #packages : [ 'Boardwalk*' ],
       #format: #lcov
     }
-  }
+  }   
 }

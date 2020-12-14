@@ -226,6 +226,16 @@ BoardwalkJavascriptTest >> testJSObjectNotIdenticalTo [
 ]
 
 { #category : #tests }
+BoardwalkJavascriptTest >> testJSObjectPlus [
+
+	| jsObject |
+
+	jsObject := JSStream this + 1.
+
+	self assert: jsObject equals: 'this+1'
+]
+
+{ #category : #tests }
 BoardwalkJavascriptTest >> testJSObjectSelect [
 
 	| jsObject |
