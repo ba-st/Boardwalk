@@ -9,7 +9,8 @@ SmalltalkCISpec {
   ],
   #testing : {
     #coverage : {
-       #packages : [ 'Boardwalk*' ]
+       #packages : [ 'Boardwalk*' ],
+      #format: #lcov
     }
   }
 }
