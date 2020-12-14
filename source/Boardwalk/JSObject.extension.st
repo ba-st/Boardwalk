@@ -12,6 +12,17 @@ JSObject >> * anObject [
 ]
 
 { #category : #'*Boardwalk' }
+JSObject >> + anObject [ 
+	"Add the receiver and anObject"
+	
+	self
+		addDecoration:
+			(JSBinary new
+				operator: '+';
+				statement: anObject)
+]
+
+{ #category : #'*Boardwalk' }
 JSObject >> asExpression [
 
 	self addDecoration: JSExpression new
