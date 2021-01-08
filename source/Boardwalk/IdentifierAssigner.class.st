@@ -6,7 +6,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'prefix',
-		'identifierOptional'
+		'identifierOptional',
+		'shouldBeUsed'
 	],
 	#category : #'Boardwalk-WebApplication'
 }
@@ -19,17 +20,22 @@ IdentifierAssigner class >> prefixedBy: aPrefix [
 	^ self new initializePrefixedBy: aPrefix
 ]
 
-{ #category : #Accessing }
-IdentifierAssigner >> assignedIdentifier [
+{ #category : #configuring }
+IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 
-	^ identifierOptional
-		withContentDo: [ :id | id ]
-		ifUnused: [ :explanations | AssertionFailed signalAll: explanations ]
+	shouldBeUsed then: [ aComponent id: ( self identifierOn: aCanvas ) ]
 ]
 
-{ #category : #Configuring }
-IdentifierAssigner >> identifyIn: aCanvas [
+{ #category : #configuring }
+IdentifierAssigner >> beRequired [
 
+	shouldBeUsed := true
+]
+
+{ #category : #configuring }
+IdentifierAssigner >> identifierOn: aCanvas [
+
+	shouldBeUsed := true.
 	^ identifierOptional
 		withContentDo: [ :identifier | identifier ]
 		ifUnused: [ | identifier |
@@ -37,18 +43,14 @@ IdentifierAssigner >> identifyIn: aCanvas [
 			identifier := '<1s>-<2s>' expandMacrosWith: prefix greaseString with: aCanvas nextId greaseString.
 			HTMLAsserter new assertIsValidIdentifier: identifier.
 			identifierOptional := Optional containing: identifier.
-			identifier ]
+			identifier
+			]
 ]
 
 { #category : #initialization }
 IdentifierAssigner >> initializePrefixedBy: aPrefix [
 
 	prefix := aPrefix.
+	shouldBeUsed := false.
 	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'
-]
-
-{ #category : #Accessing }
-IdentifierAssigner >> withAssignedIdentifierDo: aMonadycBlock [
-
-	identifierOptional withContentDo: aMonadycBlock 
 ]

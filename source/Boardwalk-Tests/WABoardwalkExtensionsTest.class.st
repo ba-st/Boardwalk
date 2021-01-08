@@ -41,29 +41,10 @@ WABoardwalkExtensionsTest >> testTagBrushClasses [
 ]
 
 { #category : #tests }
-WABoardwalkExtensionsTest >> testTagBrushIdentifier [
+WABoardwalkExtensionsTest >> testTagBrushIdentifierOn [
 
 	self
-		render: [ :canvas | 
-			| div |
-
-			div := canvas div.
-			self should: [ div identifier ] raise: AssertionFailed.
-			canvas ensureIdFor: div.
-			self shouldnt: [ div identifier ] raise: AssertionFailed ]
-]
-
-{ #category : #tests }
-WABoardwalkExtensionsTest >> testTagBrushIdentifyIn [
-
-	self
-		render: [ :canvas | 
-			| div |
-
-			div := canvas div.
-			self should: [ div identifier ] raise: AssertionFailed.
-			div identifyIn: canvas.
-			self shouldnt: [ div identifier ] raise: AssertionFailed ]
+		render: [ :canvas | self shouldnt: [ canvas div identifierOn: canvas ] raise: AssertionFailed ]
 ]
 
 { #category : #tests }
