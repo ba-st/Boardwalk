@@ -27,7 +27,15 @@ IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 ]
 
 { #category : #configuring }
-IdentifierAssigner >> beRequired [
+IdentifierAssigner >> beRequiredAfterRendering [
+
+	[ AssertionFailed
+		signal: 'Identification requested after rendering was already started. Review initialization order'
+	] unless: shouldBeUsed
+]
+
+{ #category : #configuring }
+IdentifierAssigner >> beRequiredBeforeRendering [
 
 	shouldBeUsed := true
 ]
