@@ -22,6 +22,7 @@ IdentifierAssignerTest >> nextId [
 { #category : #running }
 IdentifierAssignerTest >> setUp [
 
+	super setUp.
 	idOptional := Optional unused
 ]
 

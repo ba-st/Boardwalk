@@ -7,8 +7,8 @@ Class {
 	#instVars : [
 		'prefix',
 		'identifierOptional',
-		'shouldBeUsed',
-		'wasApplied'
+		'wasApplied',
+		'isRequired'
 	],
 	#category : #'Boardwalk-WebApplication'
 }
@@ -24,21 +24,15 @@ IdentifierAssigner class >> prefixedBy: aPrefix [
 { #category : #configuring }
 IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 
-	shouldBeUsed then: [ aComponent id: ( self identifierOn: aCanvas ) ].
+	isRequired then: [ aComponent id: ( self identifierOn: aCanvas ) ].
 	wasApplied := true
 ]
 
 { #category : #configuring }
 IdentifierAssigner >> beRequired [
 
-	shouldBeUsed
-		ifFalse: [ wasApplied
-				ifTrue: [ AssertionFailed
-						signal:
-							'Identification requested after rendering was already started. Review view creation and configuration order. If a component renders its own container, and is created during the container rendering, the container must be sent `beIdentifiable` after its creation.'
-					]
-				ifFalse: [ shouldBeUsed := true ]
-			]
+	[ wasApplied then: [ self signalAlreadyApplied ] otherwise: [ isRequired := true ] ]
+		unless: isRequired
 ]
 
 { #category : #configuring }
@@ -61,6 +55,14 @@ IdentifierAssigner >> initializePrefixedBy: aPrefix [
 
 	wasApplied := false.
 	prefix := aPrefix.
-	shouldBeUsed := false.
+	isRequired := false.
 	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'
+]
+
+{ #category : #private }
+IdentifierAssigner >> signalAlreadyApplied [
+
+	^ AssertionFailed
+		signal:
+			'Identification requested after rendering was already started. Review view creation and configuration order. If a component renders its own container, and is created during the container rendering, the container must be sent `beIdentifiable` after its creation.'
 ]
