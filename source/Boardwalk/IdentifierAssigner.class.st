@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'prefix',
 		'identifierOptional',
-		'shouldBeUsed'
+		'shouldBeUsed',
+		'wasApplied'
 	],
 	#category : #'Boardwalk-WebApplication'
 }
@@ -23,27 +24,27 @@ IdentifierAssigner class >> prefixedBy: aPrefix [
 { #category : #configuring }
 IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 
-	shouldBeUsed then: [ aComponent id: ( self identifierOn: aCanvas ) ]
+	shouldBeUsed then: [ aComponent id: ( self identifierOn: aCanvas ) ].
+	wasApplied := true
 ]
 
 { #category : #configuring }
-IdentifierAssigner >> beRequiredAfterRendering [
+IdentifierAssigner >> beRequired [
 
-	[ AssertionFailed
-		signal: 'Identification requested after rendering was already started. Review initialization order'
-	] unless: shouldBeUsed
-]
-
-{ #category : #configuring }
-IdentifierAssigner >> beRequiredBeforeRendering [
-
-	shouldBeUsed := true
+	shouldBeUsed
+		ifFalse: [ wasApplied
+				ifTrue: [ AssertionFailed
+						signal:
+							'Identification requested after rendering was already started. Review view creation and configuration order. If a component renders its own container, and is created during the container rendering, the container must be sent `beIdentifiable` after its creation.'
+					]
+				ifFalse: [ shouldBeUsed := true ]
+			]
 ]
 
 { #category : #configuring }
 IdentifierAssigner >> identifierOn: aCanvas [
 
-	shouldBeUsed := true.
+	self beRequired.
 	^ identifierOptional
 		withContentDo: [ :identifier | identifier ]
 		ifUnused: [ | identifier |
@@ -58,6 +59,7 @@ IdentifierAssigner >> identifierOn: aCanvas [
 { #category : #initialization }
 IdentifierAssigner >> initializePrefixedBy: aPrefix [
 
+	wasApplied := false.
 	prefix := aPrefix.
 	shouldBeUsed := false.
 	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'
