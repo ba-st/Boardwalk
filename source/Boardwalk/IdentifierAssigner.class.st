@@ -6,7 +6,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'prefix',
-		'identifierOptional'
+		'identifierOptional',
+		'wasApplied',
+		'isRequired'
 	],
 	#category : #'Boardwalk-WebApplication'
 }
@@ -19,17 +21,24 @@ IdentifierAssigner class >> prefixedBy: aPrefix [
 	^ self new initializePrefixedBy: aPrefix
 ]
 
-{ #category : #Accessing }
-IdentifierAssigner >> assignedIdentifier [
+{ #category : #configuring }
+IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 
-	^ identifierOptional
-		withContentDo: [ :id | id ]
-		ifUnused: [ :explanations | AssertionFailed signalAll: explanations ]
+	isRequired then: [ aComponent id: ( self identifierOn: aCanvas ) ].
+	wasApplied := true
 ]
 
-{ #category : #Configuring }
-IdentifierAssigner >> identifyIn: aCanvas [
+{ #category : #configuring }
+IdentifierAssigner >> beRequired [
 
+	[ wasApplied then: [ self signalAlreadyApplied ] otherwise: [ isRequired := true ] ]
+		unless: isRequired
+]
+
+{ #category : #configuring }
+IdentifierAssigner >> identifierOn: aCanvas [
+
+	self beRequired.
 	^ identifierOptional
 		withContentDo: [ :identifier | identifier ]
 		ifUnused: [ | identifier |
@@ -37,18 +46,23 @@ IdentifierAssigner >> identifyIn: aCanvas [
 			identifier := '<1s>-<2s>' expandMacrosWith: prefix greaseString with: aCanvas nextId greaseString.
 			HTMLAsserter new assertIsValidIdentifier: identifier.
 			identifierOptional := Optional containing: identifier.
-			identifier ]
+			identifier
+			]
 ]
 
 { #category : #initialization }
 IdentifierAssigner >> initializePrefixedBy: aPrefix [
 
+	wasApplied := false.
 	prefix := aPrefix.
+	isRequired := false.
 	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'
 ]
 
-{ #category : #Accessing }
-IdentifierAssigner >> withAssignedIdentifierDo: aMonadycBlock [
+{ #category : #private }
+IdentifierAssigner >> signalAlreadyApplied [
 
-	identifierOptional withContentDo: aMonadycBlock 
+	^ AssertionFailed
+		signal:
+			'Identification requested after rendering was already started. Review view creation and configuration order. If a component renders its own container, and is created during the container rendering, the container must be sent `beIdentifiable` after its creation.'
 ]
