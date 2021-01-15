@@ -48,6 +48,35 @@ IdentifierAssignerTest >> testBeRequired [
 ]
 
 { #category : #test }
+IdentifierAssignerTest >> testBeRequiredAfterApplyingIsNotAllowed [
+
+	| assigner |
+
+	assigner := IdentifierAssigner prefixedBy: 'table'.
+	assigner applyTo: self on: self.
+	idOptional withContentDo: [ self fail ].
+	self
+		should: [ assigner beRequired ]
+		raise: AssertionFailed
+		withMessageText:
+			'Identification requested after rendering was already started. Review view creation and configuration order. If a component renders its own container, and is created during the container rendering, the container must be sent `beIdentifiable` after its creation.'
+]
+
+{ #category : #test }
+IdentifierAssignerTest >> testBeRequiredBeforeAndAfterApplyingIsAllowed [
+
+	| assigner |
+
+	assigner := IdentifierAssigner prefixedBy: 'table'.
+	assigner beRequired.
+	assigner applyTo: self on: self.
+	idOptional withContentDo: [ :id | self assert: id equals: 'table-123' ] ifUnused: [ self fail ].
+
+	assigner beRequired.
+	idOptional withContentDo: [ :id | self assert: id equals: 'table-123' ] ifUnused: [ self fail ]
+]
+
+{ #category : #test }
 IdentifierAssignerTest >> testIdentifierOn [
 
 	| assigner |
