@@ -40,9 +40,7 @@ BaselineOfBoardwalk >> setUpDependencies: spec [
 		project: 'Seaside3-Javascript'
 			copyFrom: 'Seaside3'
 			with: [ spec loads: #('Javascript' 'Zinc' 'JSON') ];
-		project: 'Seaside3-JQuery'
-			copyFrom: 'Seaside3'
-			with: [ spec loads: #('Core' 'Javascript' 'JQuery') ];
+		project: 'Seaside3-JQuery' copyFrom: 'Seaside3' with: [ spec loads: #('Development') ];
 		project: 'Seaside3-Javascript-Tests'
 			copyFrom: 'Seaside3'
 			with: [ spec loads: 'Javascript Tests' ]
