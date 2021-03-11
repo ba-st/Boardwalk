@@ -40,7 +40,9 @@ BaselineOfBoardwalk >> setUpDependencies: spec [
 		project: 'Seaside3-Javascript'
 			copyFrom: 'Seaside3'
 			with: [ spec loads: #('Javascript' 'Zinc' 'JSON') ];
-		project: 'Seaside3-JQuery' copyFrom: 'Seaside3' with: [ spec loads: 'JQuery Tests' ];
+		project: 'Seaside3-JQuery'
+			copyFrom: 'Seaside3'
+			with: [ spec loads: #('Core' 'Javascript' 'JQuery') ];
 		project: 'Seaside3-Javascript-Tests'
 			copyFrom: 'Seaside3'
 			with: [ spec loads: 'Javascript Tests' ]
@@ -55,7 +57,6 @@ BaselineOfBoardwalk >> setUpPackages: spec [
 		package: 'Boardwalk-SUnit'
 			with: [ spec requires: #('Seaside3-Javascript-Tests' 'Boardwalk' 'Buoy-SUnit') ];
 		group: 'Dependent-SUnit-Extensions' with: 'Boardwalk-SUnit';
-		package: 'Boardwalk-Tests'
-			with: [ spec requires: #('Boardwalk-SUnit' 'Seaside3-JQuery' 'Seaside3-Javascript-Tests') ];
+		package: 'Boardwalk-Tests' with: [ spec requires: #('Boardwalk-SUnit' 'Seaside3-JQuery') ];
 		group: 'Tests' with: 'Boardwalk-Tests'
 ]
