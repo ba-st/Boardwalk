@@ -55,6 +55,7 @@ BaselineOfBoardwalk >> setUpPackages: spec [
 		package: 'Boardwalk-SUnit'
 			with: [ spec requires: #('Seaside3-Javascript-Tests' 'Boardwalk' 'Buoy-SUnit') ];
 		group: 'Dependent-SUnit-Extensions' with: 'Boardwalk-SUnit';
-		package: 'Boardwalk-Tests' with: [ spec requires: #('Boardwalk-SUnit' 'Seaside3-JQuery') ];
+		package: 'Boardwalk-Tests'
+			with: [ spec requires: #('Boardwalk-SUnit' 'Seaside3-JQuery' 'Seaside3-Javascript-Tests') ];
 		group: 'Tests' with: 'Boardwalk-Tests'
 ]
