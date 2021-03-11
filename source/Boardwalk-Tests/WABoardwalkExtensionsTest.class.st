@@ -8,6 +8,45 @@ Class {
 }
 
 { #category : #tests }
+WABoardwalkExtensionsTest >> testExecuteAjaxCallbackUsingOn [
+
+	self
+		renderUsing: [ :canvas | 
+			| valuesReceived |
+
+			canvas jQuery ajax script: [ :subScript | valuesReceived add: 3 ].
+			canvas jQuery ajax script: [ :subScript | valuesReceived add: 7 ].
+
+			valuesReceived := OrderedCollection new.
+			self executeAjaxCallbackUsing: ( Array with: '1' -> self ) asDictionary on: canvas.
+			self assertCollection: valuesReceived hasSameElements: #(3).
+
+			valuesReceived := OrderedCollection new.
+			self executeAjaxCallbackUsing: ( Array with: '2' -> self ) asDictionary on: canvas.
+			self assertCollection: valuesReceived hasSameElements: #(7)
+			]
+]
+
+{ #category : #tests }
+WABoardwalkExtensionsTest >> testExecuteAjaxCallbacksOn [
+
+	| valuesReceived |
+
+	valuesReceived := OrderedCollection new.
+	self
+		renderUsing: [ :canvas | 
+			canvas jQuery ajax script: [ :subScript | valuesReceived add: valuesReceived size + 1 ].
+			self assert: valuesReceived isEmpty.
+
+			self executeAjaxCallbacksOn: canvas.
+			self assertCollection: valuesReceived hasSameElements: #(1).
+
+			self executeAjaxCallbacksOn: canvas.
+			self assertCollection: valuesReceived hasSameElements: #(1 2)
+			]
+]
+
+{ #category : #tests }
 WABoardwalkExtensionsTest >> testFormDoNotSubmit [
 
 	| html |

@@ -55,6 +55,39 @@ BWRenderingTest >> createCodec [
 ]
 
 { #category : #utility }
+BWRenderingTest >> executeAjaxCallbackUsing: aDictionary on: aCanvas [
+
+	| ajaxRequestContext ajaxRequest |
+
+	ajaxRequest := ( WARequest method: 'POST' uri: WARequest defaultUri )
+		setPostFields:
+			( WARequestFields new
+				addAll: aDictionary;
+				yourself );
+		yourself.
+
+	ajaxRequestContext := WARequestContext
+		request: ajaxRequest
+		response: self createResponse
+		codec: self createCodec.
+
+	[ aCanvas callbacks handle: ajaxRequestContext ]
+		on: WAResponseNotification
+		do: [ :notification | self assert: ajaxRequestContext response status equals: 200 ]
+]
+
+{ #category : #utility }
+BWRenderingTest >> executeAjaxCallbacksOn: aCanvas [
+
+	| numberOfCallbacks callbackKeys |
+
+	numberOfCallbacks := aCanvas context callbacks nextKey asInteger - 1.
+	callbackKeys := Dictionary new.
+	1 to: numberOfCallbacks do: [ :index | "The value for the key is not used" callbackKeys at: index asString put: index ].
+	self executeAjaxCallbackUsing: callbackKeys on: aCanvas
+]
+
+{ #category : #utility }
 BWRenderingTest >> fullDocumentRendering: aWARootComponent [
 
 	^ self builder
