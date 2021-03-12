@@ -55,6 +55,12 @@ BWRenderingTest >> createCodec [
 ]
 
 { #category : #utility }
+BWRenderingTest >> createHandlers [
+
+	^ Array with: WARequestHandler new
+]
+
+{ #category : #utility }
 BWRenderingTest >> executeAjaxCallbackUsing: aDictionary on: aCanvas [
 
 	| ajaxRequestContext ajaxRequest |
