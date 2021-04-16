@@ -28,6 +28,21 @@ IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 	wasApplied := true
 ]
 
+{ #category : #accessing }
+IdentifierAssigner >> assignedIdentifier [
+
+	self beRequired.
+	^ identifierOptional
+		withContentDo: [ :identifier | identifier ]
+		ifUnused: [ | identifier |
+
+			identifier := '<1s>-<2s>' expandMacrosWith: prefix with: UUID new asString.
+			HTMLAsserter new assertIsValidIdentifier: identifier.
+			identifierOptional := Optional containing: identifier.
+			identifier
+			]
+]
+
 { #category : #configuring }
 IdentifierAssigner >> beRequired [
 
@@ -38,16 +53,7 @@ IdentifierAssigner >> beRequired [
 { #category : #configuring }
 IdentifierAssigner >> identifierOn: aCanvas [
 
-	self beRequired.
-	^ identifierOptional
-		withContentDo: [ :identifier | identifier ]
-		ifUnused: [ | identifier |
-
-			identifier := '<1s>-<2s>' expandMacrosWith: prefix greaseString with: aCanvas nextId greaseString.
-			HTMLAsserter new assertIsValidIdentifier: identifier.
-			identifierOptional := Optional containing: identifier.
-			identifier
-			]
+	^ self assignedIdentifier
 ]
 
 { #category : #initialization }
