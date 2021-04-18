@@ -49,7 +49,7 @@ IdentifierAssigner >> identifierOn: aCanvas [
 			]
 		ifUnused: [ | identifier |
 
-			identifier := '<1s>-<2s>' expandMacrosWith: prefix with: aCanvas nextId.
+			identifier := '<1s>-<2s>' expandMacrosWith: prefix greaseString with: aCanvas nextId greaseString.
 			HTMLAsserter new assertIsValidIdentifier: identifier.
 			identifierOptional := Optional containing: identifier.
 			identifier
