@@ -16,7 +16,10 @@ Class {
 { #category : #'Instance Creation' }
 IdentifierAssigner class >> prefixedBy: aPrefix [
 
-	AssertionChecker enforce: [ aPrefix notEmpty ] because: 'The supplied prefix cannot be empty' raising: InstanceCreationFailed.
+	AssertionChecker
+		enforce: [ aPrefix notEmpty ]
+		because: 'The supplied prefix cannot be empty'
+		raising: InstanceCreationFailed.
 
 	^ self new initializePrefixedBy: aPrefix
 ]
@@ -28,21 +31,6 @@ IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 	wasApplied := true
 ]
 
-{ #category : #accessing }
-IdentifierAssigner >> assignedIdentifier [
-
-	self beRequired.
-	^ identifierOptional
-		withContentDo: [ :identifier | identifier ]
-		ifUnused: [ | identifier |
-
-			identifier := '<1s>-<2s>' expandMacrosWith: prefix with: UUID new asString.
-			HTMLAsserter new assertIsValidIdentifier: identifier.
-			identifierOptional := Optional containing: identifier.
-			identifier
-			]
-]
-
 { #category : #configuring }
 IdentifierAssigner >> beRequired [
 
@@ -50,10 +38,22 @@ IdentifierAssigner >> beRequired [
 		unless: isRequired
 ]
 
-{ #category : #configuring }
+{ #category : #accessing }
 IdentifierAssigner >> identifierOn: aCanvas [
 
-	^ self assignedIdentifier
+	self beRequired.
+	^ identifierOptional
+		withContentDo: [ :identifier | 
+			aCanvas nextId.
+			identifier
+			]
+		ifUnused: [ | identifier |
+
+			identifier := '<1s>-<2s>' expandMacrosWith: prefix with: aCanvas nextId.
+			HTMLAsserter new assertIsValidIdentifier: identifier.
+			identifierOptional := Optional containing: identifier.
+			identifier
+			]
 ]
 
 { #category : #initialization }
