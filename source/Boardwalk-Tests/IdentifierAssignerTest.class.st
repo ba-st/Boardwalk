@@ -2,7 +2,8 @@ Class {
 	#name : #IdentifierAssignerTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'idOptional'
+		'idOptional',
+		'nextId'
 	],
 	#category : #'Boardwalk-Tests-WebApplication'
 }
@@ -16,14 +17,16 @@ IdentifierAssignerTest >> id: anId [
 { #category : #'test support' }
 IdentifierAssignerTest >> nextId [
 
-	^ '123'
+	nextId := nextId + 1.
+	^ nextId - 1
 ]
 
 { #category : #running }
 IdentifierAssignerTest >> setUp [
 
 	super setUp.
-	idOptional := Optional unused
+	idOptional := Optional unused.
+	nextId := 1
 ]
 
 { #category : #test }
@@ -44,7 +47,7 @@ IdentifierAssignerTest >> testBeRequired [
 	assigner := IdentifierAssigner prefixedBy: 'table'.
 	assigner beRequired.
 	assigner applyTo: self on: self.
-	idOptional withContentDo: [ :id | self assert: id equals: 'table-123' ] ifUnused: [ self fail ]
+	idOptional withContentDo: [ :id | self assert: id equals: 'table-1' ] ifUnused: [ self fail ]
 ]
 
 { #category : #test }
@@ -70,10 +73,10 @@ IdentifierAssignerTest >> testBeRequiredBeforeAndAfterApplyingIsAllowed [
 	assigner := IdentifierAssigner prefixedBy: 'table'.
 	assigner beRequired.
 	assigner applyTo: self on: self.
-	idOptional withContentDo: [ :id | self assert: id equals: 'table-123' ] ifUnused: [ self fail ].
+	idOptional withContentDo: [ :id | self assert: id equals: 'table-1' ] ifUnused: [ self fail ].
 
 	assigner beRequired.
-	idOptional withContentDo: [ :id | self assert: id equals: 'table-123' ] ifUnused: [ self fail ]
+	idOptional withContentDo: [ :id | self assert: id equals: 'table-1' ] ifUnused: [ self fail ]
 ]
 
 { #category : #test }
@@ -82,7 +85,7 @@ IdentifierAssignerTest >> testIdentifierOn [
 	| assigner |
 
 	assigner := IdentifierAssigner prefixedBy: 'table'.
-	self assert: ( assigner identifierOn: self ) equals: 'table-123'
+	self assert: ( assigner identifierOn: self ) equals: 'table-1'
 ]
 
 { #category : #test }
@@ -100,5 +103,18 @@ IdentifierAssignerTest >> testPrefixedBy [
 	| assigner |
 
 	assigner := IdentifierAssigner prefixedBy: 'table'.
-	self assert: ( assigner identifierOn: self ) equals: 'table-123'
+	self assert: ( assigner identifierOn: self ) equals: 'table-1'
+]
+
+{ #category : #test }
+IdentifierAssignerTest >> testStoredIdDoesNotKeepCounterFromIncreasing [
+
+	| assigner |
+
+	assigner := IdentifierAssigner prefixedBy: 'table'.
+	self assert: nextId equals: 1.
+	self assert: ( assigner identifierOn: self ) equals: 'table-1'.
+	self assert: nextId equals: 2.
+	self assert: ( assigner identifierOn: self ) equals: 'table-1'.
+	self assert: nextId equals: 3
 ]

@@ -16,7 +16,10 @@ Class {
 { #category : #'Instance Creation' }
 IdentifierAssigner class >> prefixedBy: aPrefix [
 
-	AssertionChecker enforce: [ aPrefix notEmpty ] because: 'The supplied prefix cannot be empty' raising: InstanceCreationFailed.
+	AssertionChecker
+		enforce: [ aPrefix notEmpty ]
+		because: 'The supplied prefix cannot be empty'
+		raising: InstanceCreationFailed.
 
 	^ self new initializePrefixedBy: aPrefix
 ]
@@ -35,12 +38,15 @@ IdentifierAssigner >> beRequired [
 		unless: isRequired
 ]
 
-{ #category : #configuring }
+{ #category : #accessing }
 IdentifierAssigner >> identifierOn: aCanvas [
 
 	self beRequired.
 	^ identifierOptional
-		withContentDo: [ :identifier | identifier ]
+		withContentDo: [ :identifier | 
+			aCanvas nextId.
+			identifier
+			]
 		ifUnused: [ | identifier |
 
 			identifier := '<1s>-<2s>' expandMacrosWith: prefix greaseString with: aCanvas nextId greaseString.
