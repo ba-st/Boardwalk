@@ -31,7 +31,7 @@ WATestingFileMetadataLibrary class >> version [
 	^ '0.0.0'
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 WATestingFileMetadataLibrary >> jsUndefinedJs [
 
 	^ WAFileLibraryResource
@@ -46,7 +46,7 @@ WATestingFileMetadataLibrary >> jsUndefinedJs [
 		contents: ( GRDelayedSend receiver: self selector: #jsUndefinedJsContent )
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 WATestingFileMetadataLibrary >> jsUndefinedJsContent [
 
 	^ self javascriptContentFrom: [ :js | js << JSStream undefined ]
