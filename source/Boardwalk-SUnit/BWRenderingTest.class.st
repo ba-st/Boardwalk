@@ -51,7 +51,7 @@ BWRenderingTest >> builder [
 { #category : #utility }
 BWRenderingTest >> createCodec [
 
-	^ GRPharoUtf8Codec new
+	^ GRCodec forEncoding: 'utf8'
 ]
 
 { #category : #utility }
