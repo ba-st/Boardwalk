@@ -167,6 +167,13 @@ WAFileTestingPlatform >> pathSeparator [
 	^ platform pathSeparator
 ]
 
+{ #category : #'file library' }
+WAFileTestingPlatform >> readFileStreamOn: aString do: aBlock binary: aBoolean [
+
+	<ignoreForCoverage>
+	^ platform readFileStreamOn: aString do: aBlock binary: aBoolean
+]
+
 { #category : #factory }
 WAFileTestingPlatform >> readWriteByteStream [
 
@@ -258,6 +265,13 @@ WAFileTestingPlatform >> terminateProcess: aProcess [
 	^ platform terminateProcess: aProcess
 ]
 
+{ #category : #processes }
+WAFileTestingPlatform >> thisContext [
+
+	<ignoreForCoverage>
+	^ platform thisContext
+]
+
 { #category : #factory }
 WAFileTestingPlatform >> weakDictionaryOfSize: aNumber [
 
@@ -275,4 +289,11 @@ WAFileTestingPlatform >> write: aStringOrByteArray toFile: aFileNameString inFol
 	hashByFile at: filePathString put: ( self secureHashFor: aStringOrByteArray ) hex.
 	contentsByFileOptional
 		withContentDo: [ :contentsByFile | contentsByFile at: filePathString put: aStringOrByteArray ]
+]
+
+{ #category : #'file library' }
+WAFileTestingPlatform >> writeFileStreamOn: aString do: aBlock binary: aBoolean [
+
+	<ignoreForCoverage>
+	^ platform writeFileStreamOn: aString do: aBlock binary: aBoolean
 ]
