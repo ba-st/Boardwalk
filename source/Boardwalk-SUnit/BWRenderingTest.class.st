@@ -48,10 +48,10 @@ BWRenderingTest >> builder [
 		yourself
 ]
 
-{ #category : #utility }
+{ #category : #configuration }
 BWRenderingTest >> createCodec [
 
-	^ GRCodec forEncoding: 'utf8'
+	^ GRCodec forEncoding: 'utf-8'
 ]
 
 { #category : #utility }
