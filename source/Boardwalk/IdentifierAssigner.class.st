@@ -5,13 +5,19 @@ Class {
 	#name : #IdentifierAssigner,
 	#superclass : #Object,
 	#instVars : [
-		'prefix',
 		'identifierOptional',
 		'wasApplied',
-		'isRequired'
+		'isRequired',
+		'getIdentifierBlock'
 	],
 	#category : #'Boardwalk-WebApplication'
 }
+
+{ #category : #'Instance Creation' }
+IdentifierAssigner class >> assigningAlways: anIndentifier [
+
+	^ self resolvingIdentifierWith: [ :canvas | anIndentifier ]
+]
 
 { #category : #'Instance Creation' }
 IdentifierAssigner class >> prefixedBy: aPrefix [
@@ -21,7 +27,16 @@ IdentifierAssigner class >> prefixedBy: aPrefix [
 		because: 'The supplied prefix cannot be empty'
 		raising: InstanceCreationFailed.
 
-	^ self new initializePrefixedBy: aPrefix
+	^ self resolvingIdentifierWith: [ :canvas | 
+		  '<1s>-<2s>'
+			  expandMacrosWith: aPrefix greaseString
+			  with: canvas nextId greaseString ]
+]
+
+{ #category : #private }
+IdentifierAssigner class >> resolvingIdentifierWith: aGetIdentifierBlock [
+
+	^ self new initializeResolvingIdentifierWith: aGetIdentifierBlock
 ]
 
 { #category : #configuring }
@@ -43,26 +58,25 @@ IdentifierAssigner >> identifierOn: aCanvas [
 
 	self beRequired.
 	^ identifierOptional
-		withContentDo: [ :identifier | 
-			aCanvas nextId.
-			identifier
-			]
-		ifUnused: [ | identifier |
+		  withContentDo: [ :identifier | 
+			  aCanvas nextId.
+			  identifier ]
+		  ifUnused: [ 
+			  | identifier |
+			  identifier := getIdentifierBlock cull: aCanvas.
+			  HTMLAsserter new assertIsValidIdentifier: identifier.
+			  identifierOptional := Optional containing: identifier.
+			  identifier ]
 
-			identifier := '<1s>-<2s>' expandMacrosWith: prefix greaseString with: aCanvas nextId greaseString.
-			HTMLAsserter new assertIsValidIdentifier: identifier.
-			identifierOptional := Optional containing: identifier.
-			identifier
-			]
 ]
 
 { #category : #initialization }
-IdentifierAssigner >> initializePrefixedBy: aPrefix [
+IdentifierAssigner >> initializeResolvingIdentifierWith: aGetIdentifierBlock [
 
 	wasApplied := false.
-	prefix := aPrefix.
 	isRequired := false.
-	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'
+	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'.
+	getIdentifierBlock := aGetIdentifierBlock
 ]
 
 { #category : #private }
