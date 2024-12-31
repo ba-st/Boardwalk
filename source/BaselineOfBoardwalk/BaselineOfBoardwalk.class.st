@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfBoardwalk,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfBoardwalk
+	#name : 'BaselineOfBoardwalk',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfBoardwalk',
+	#package : 'BaselineOfBoardwalk'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBoardwalk >> baseline: spec [
 
 	<baseline>
@@ -20,13 +21,13 @@ BaselineOfBoardwalk >> baseline: spec [
 			]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfBoardwalk >> projectClass [
 
 	^ MetacelloCypressBaselineProject
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBoardwalk >> setUpDependencies: spec [
 
 	spec
@@ -36,7 +37,7 @@ BaselineOfBoardwalk >> setUpDependencies: spec [
 		project: 'Buoy-Tools' copyFrom: 'Buoy' with: [ spec loads: 'Tools' ].
 
 	spec
-		baseline: 'Seaside3' with: [ spec repository: 'github://SeasideSt/Seaside:v3.5.x/repository' ];
+		baseline: 'Seaside3' with: [ spec repository: 'github://SeasideSt/Seaside:v3.6.x/repository' ];
 		project: 'Seaside3-Javascript'
 			copyFrom: 'Seaside3'
 			with: [ spec loads: #('Javascript' 'Zinc' 'JSON') ];
@@ -46,7 +47,7 @@ BaselineOfBoardwalk >> setUpDependencies: spec [
 			with: [ spec loads: 'Javascript Tests' ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBoardwalk >> setUpPackages: spec [
 
 	spec
