@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfBoardwalk,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfBoardwalk
+	#name : 'BaselineOfBoardwalk',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfBoardwalk',
+	#package : 'BaselineOfBoardwalk'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBoardwalk >> baseline: spec [
 
 	<baseline>
@@ -20,17 +21,17 @@ BaselineOfBoardwalk >> baseline: spec [
 			]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfBoardwalk >> projectClass [
 
 	^ MetacelloCypressBaselineProject
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBoardwalk >> setUpDependencies: spec [
 
 	spec
-		baseline: 'Buoy' with: [ spec repository: 'github://ba-st/Buoy:v6' ];
+		baseline: 'Buoy' with: [ spec repository: 'github://ba-st/Buoy:v8' ];
 		project: 'Buoy-Deployment' copyFrom: 'Buoy' with: [ spec loads: 'Deployment' ];
 		project: 'Buoy-SUnit' copyFrom: 'Buoy' with: [ spec loads: 'Dependent-SUnit-Extensions' ];
 		project: 'Buoy-Tools' copyFrom: 'Buoy' with: [ spec loads: 'Tools' ].
@@ -46,7 +47,7 @@ BaselineOfBoardwalk >> setUpDependencies: spec [
 			with: [ spec loads: 'Javascript Tests' ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBoardwalk >> setUpPackages: spec [
 
 	spec
