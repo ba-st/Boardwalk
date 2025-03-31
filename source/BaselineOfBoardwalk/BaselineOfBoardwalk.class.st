@@ -37,7 +37,7 @@ BaselineOfBoardwalk >> setUpDependencies: spec [
 		project: 'Buoy-Tools' copyFrom: 'Buoy' with: [ spec loads: 'Tools' ].
 
 	spec
-		baseline: 'Seaside3' with: [ spec repository: 'github://SeasideSt/Seaside:v3.6.x/repository' ];
+		baseline: 'Seaside3' with: [ spec repository: 'github://SeasideSt/Seaside:v3.5.x/repository' ];
 		project: 'Seaside3-Javascript'
 			copyFrom: 'Seaside3'
 			with: [ spec loads: #('Javascript' 'Zinc' 'JSON') ];
