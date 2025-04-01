@@ -40,6 +40,17 @@ IdentifierAssignerTest >> testApplyToOn [
 ]
 
 { #category : #test }
+IdentifierAssignerTest >> testAssigningAlways [
+
+	| assigner |
+
+	assigner := IdentifierAssigner assigningAlways: 'table'.
+	self
+		assert: (assigner identifierOn: self) equals: 'table';
+		assert: (assigner identifierOn: self) equals: 'table'
+]
+
+{ #category : #test }
 IdentifierAssignerTest >> testBeRequired [
 
 	| assigner |
