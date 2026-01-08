@@ -2,12 +2,14 @@
 I have the responsibility to provide assertions for HTML related aspects.
 "
 Class {
-	#name : #HTMLAsserter,
-	#superclass : #Object,
-	#category : 'Boardwalk-WebApplication'
+	#name : 'HTMLAsserter',
+	#superclass : 'Object',
+	#category : 'Boardwalk-WebApplication',
+	#package : 'Boardwalk',
+	#tag : 'WebApplication'
 }
 
-{ #category : #Asserting }
+{ #category : 'Asserting' }
 HTMLAsserter >> assertIsValidIdentifier: candidate [
 
 	"http://stackoverflow.com/questions/70579/what-are-valid-values-for-the-id-attribute-in-html	

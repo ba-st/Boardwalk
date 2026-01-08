@@ -2,18 +2,20 @@
 I'm responsible of the generation and assignment of identifiers to the web view using me.
 "
 Class {
-	#name : #IdentifierAssigner,
-	#superclass : #Object,
+	#name : 'IdentifierAssigner',
+	#superclass : 'Object',
 	#instVars : [
 		'prefix',
 		'identifierOptional',
 		'wasApplied',
 		'isRequired'
 	],
-	#category : #'Boardwalk-WebApplication'
+	#category : 'Boardwalk-WebApplication',
+	#package : 'Boardwalk',
+	#tag : 'WebApplication'
 }
 
-{ #category : #'Instance Creation' }
+{ #category : 'Instance Creation' }
 IdentifierAssigner class >> prefixedBy: aPrefix [
 
 	AssertionChecker
@@ -24,21 +26,21 @@ IdentifierAssigner class >> prefixedBy: aPrefix [
 	^ self new initializePrefixedBy: aPrefix
 ]
 
-{ #category : #configuring }
+{ #category : 'configuring' }
 IdentifierAssigner >> applyTo: aComponent on: aCanvas [
 
 	isRequired then: [ aComponent id: ( self identifierOn: aCanvas ) ].
 	wasApplied := true
 ]
 
-{ #category : #configuring }
+{ #category : 'configuring' }
 IdentifierAssigner >> beRequired [
 
 	[ wasApplied then: [ self signalAlreadyApplied ] otherwise: [ isRequired := true ] ]
 		unless: isRequired
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 IdentifierAssigner >> identifierOn: aCanvas [
 
 	self beRequired.
@@ -56,7 +58,7 @@ IdentifierAssigner >> identifierOn: aCanvas [
 			]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 IdentifierAssigner >> initializePrefixedBy: aPrefix [
 
 	wasApplied := false.
@@ -65,7 +67,7 @@ IdentifierAssigner >> initializePrefixedBy: aPrefix [
 	identifierOptional := Optional unusedBecause: 'The identifier was never assigned'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 IdentifierAssigner >> signalAlreadyApplied [
 
 	^ AssertionFailed

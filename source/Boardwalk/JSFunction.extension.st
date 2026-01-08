@@ -1,6 +1,6 @@
-Extension { #name : #JSFunction }
+Extension { #name : 'JSFunction' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSFunction >> asArrowFunction: aCollection [
 
 	| function |

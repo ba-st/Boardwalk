@@ -2,24 +2,26 @@
 I represent an anonymous JavaScript function using the arrow (->) syntax
 "
 Class {
-	#name : #JSArrowFunction,
-	#superclass : #JSFunction,
-	#category : #'Boardwalk-Javascript'
+	#name : 'JSArrowFunction',
+	#superclass : 'JSFunction',
+	#category : 'Boardwalk-Javascript',
+	#package : 'Boardwalk',
+	#tag : 'Javascript'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 JSArrowFunction >> asArrowFunction [
 
 	^ self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 JSArrowFunction >> asArrowFunction: aCollection [
 
 	self arguments: aCollection
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 JSArrowFunction >> asFunction [
 
 	| function |
@@ -31,28 +33,35 @@ JSArrowFunction >> asFunction [
 	^ function
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 JSArrowFunction >> asFunction: aCollection [
 
 	^ self asFunction asFunction: aCollection
 ]
 
-{ #category : #printing }
-JSArrowFunction >> javascriptContentOn: aStream [
+{ #category : 'printing' }
+JSArrowFunction >> javascriptContentOn: aRenderer [
 
-	aStream nextPutAll: '('.
-	self arguments do: [ :each | aStream nextPutAll: each ] separatedBy: [ aStream nextPut: $, ].
-	aStream nextPutAll: ') => {'.
-	statements isEmpty
-		ifFalse: [ statements allButLast
-				do: [ :each | 
-					aStream
-						javascript: each;
-						nextPut: $;
-					].
-			self return
-				ifTrue: [ aStream nextPutAll: 'return ' ].
-			aStream javascript: statements last
-			].
-	aStream nextPut: $}
+	aRenderer arguments: [
+			arguments
+				do: [ :argument | aRenderer document identifier: argument ]
+				separatedBy: [ aRenderer document identifier: ',' ]
+		].
+	aRenderer document identifier: ' => '.
+	aRenderer object: [
+			statements isEmpty ifFalse: [
+					self return
+						ifTrue: [
+								1 to: statements size - 1 do: [ :index |
+										aRenderer render: ( statements at: index ).
+										aRenderer document separator
+									].
+								aRenderer return: statements last
+							]
+						ifFalse: [
+							statements
+								do: [ :each | aRenderer render: each ]
+								separatedBy: [ aRenderer document separator ] ]
+				]
+		]
 ]

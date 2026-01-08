@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 String >> asArrowFunction: aCollection [
 
 	^ ( JSStream on: self ) asArrowFunction: aCollection

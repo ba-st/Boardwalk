@@ -1,12 +1,12 @@
-Extension { #name : #WAAbstractFileLibrary }
+Extension { #name : 'WAAbstractFileLibrary' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 WAAbstractFileLibrary class >> isForDeployment [
 
 	^true
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 WAAbstractFileLibrary class >> isForDevelopment [
 
 	^true

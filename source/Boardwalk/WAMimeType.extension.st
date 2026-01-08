@@ -1,6 +1,6 @@
-Extension { #name : #WAMimeType }
+Extension { #name : 'WAMimeType' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 WAMimeType class >> applicationJavascript [
 
 	^ self main: 'application' sub: 'javascript'

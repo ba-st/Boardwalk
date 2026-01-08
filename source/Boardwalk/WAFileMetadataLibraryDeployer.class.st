@@ -2,27 +2,29 @@
 I'm a deployer aimed at not only generating the static contents from a list of libraries, but also creating a file including useful metadata to be used when the files are uploaded to a CDN.
 "
 Class {
-	#name : #WAFileMetadataLibraryDeployer,
-	#superclass : #Object,
+	#name : 'WAFileMetadataLibraryDeployer',
+	#superclass : 'Object',
 	#instVars : [
 		'libraries'
 	],
-	#category : #'Boardwalk-WebApplication'
+	#category : 'Boardwalk-WebApplication',
+	#package : 'Boardwalk',
+	#tag : 'WebApplication'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 WAFileMetadataLibraryDeployer class >> deployingAll: libraryFactories [
 
 	^ self new initializeDeployingAll: libraryFactories
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 WAFileMetadataLibraryDeployer >> deployFiles [
 
 	libraries do: [ :library | library deployFiles ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 WAFileMetadataLibraryDeployer >> deployFilesMetadata [
 
 	| metadataJSON |
@@ -45,7 +47,7 @@ WAFileMetadataLibraryDeployer >> deployFilesMetadata [
 	GRPlatform current write: metadataJSON toFile: 'libraries-metadata.json' inFolder: '.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 WAFileMetadataLibraryDeployer >> initializeDeployingAll: libraryFactories [
 
 	libraries := libraryFactories
@@ -59,7 +61,7 @@ WAFileMetadataLibraryDeployer >> initializeDeployingAll: libraryFactories [
 		servedAt: '/' seasideUrl
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 WAFileMetadataLibraryDeployer >> resourcesOf: library [
 
 	^ library fileSelectors collect: [ :selector | library perform: selector ]
