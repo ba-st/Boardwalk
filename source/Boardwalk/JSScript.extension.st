@@ -1,6 +1,6 @@
-Extension { #name : #JSScript }
+Extension { #name : 'JSScript' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> asVariableName: aVariableName [
 
 	^ aVariableName isString
@@ -8,25 +8,25 @@ JSScript >> asVariableName: aVariableName [
 		ifFalse: [ aVariableName ]
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> call: aFunctionName [
 
 	^ self call: aFunctionName withArguments: #()
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> call: aFunctionName with: anObject [
 
 	^ self call: aFunctionName withArguments: (Array with: anObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> call: aFunctionName with: anObject1 with: anObject2 [
 
 	^ self call: aFunctionName withArguments: (Array with: anObject1 with: anObject2)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> call: aFunctionName with: anObject1 with: anObject2 with: anObject3 [
 
 	^ self
@@ -34,31 +34,31 @@ JSScript >> call: aFunctionName with: anObject1 with: anObject2 with: anObject3 
 		withArguments: (Array with: anObject1 with: anObject2 with: anObject3)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> call: aFunctionName withArguments: anArray [
 
 	^JSFunctionCall for: aFunctionName withAll: anArray 
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> const: aVariableName assign: anObject [
 
 	^ JSDeclareConstVariable named: ( ( self asVariableName: aVariableName ) assign: anObject )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> if: condition then: statement [
 
 	^ condition nonInlinedThen: statement
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> if: condition then: trueStatement else: falseStatement [
 
 	^ condition nonInlinedThen: trueStatement else: falseStatement
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSScript >> var: aVariableName [
 
 	^ JSDeclareGlobalNamespace named: ( self asVariableName: aVariableName )

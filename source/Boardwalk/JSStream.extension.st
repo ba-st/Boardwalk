@@ -1,6 +1,6 @@
-Extension { #name : #JSStream }
+Extension { #name : 'JSStream' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSStream class >> undefined [
 
 	^ self on: 'undefined'

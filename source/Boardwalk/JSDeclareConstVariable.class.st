@@ -2,21 +2,22 @@
 A Javascript const variable declaration
 "
 Class {
-	#name : #JSDeclareConstVariable,
-	#superclass : #JSMember,
-	#category : #'Boardwalk-Javascript'
+	#name : 'JSDeclareConstVariable',
+	#superclass : 'JSMember',
+	#category : 'Boardwalk-Javascript',
+	#package : 'Boardwalk',
+	#tag : 'Javascript'
 }
 
-{ #category : #printing }
-JSDeclareConstVariable >> javascriptContentOn: aStream [
+{ #category : 'printing' }
+JSDeclareConstVariable >> javascriptContentOn: aRenderer [
 
-	aStream
-		nextPutAll: 'const';
-		space;
-		javascript: name
+	aRenderer document identifier: 'const'.
+	aRenderer document nextPut: Character space.
+	aRenderer render: name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 JSDeclareConstVariable >> javascriptOn: aStream [
 
 	self javascriptContentOn: aStream

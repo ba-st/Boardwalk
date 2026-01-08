@@ -2,16 +2,18 @@
 I'm a File Handler that allows to configure the available file library classes.
 "
 Class {
-	#name : #WADeploymentAwareFileHandler,
-	#superclass : #WAFileHandler,
+	#name : 'WADeploymentAwareFileHandler',
+	#superclass : 'WAFileHandler',
 	#instVars : [
 		'libraries',
 		'baseUrlForLibraryOptional'
 	],
-	#category : 'Boardwalk-WebApplication'
+	#category : 'Boardwalk-WebApplication',
+	#package : 'Boardwalk',
+	#tag : 'WebApplication'
 }
 
-{ #category : #'private-Installing' }
+{ #category : 'private-Installing' }
 WADeploymentAwareFileHandler class >> install: fileHandler [
 
 	WAFileHandler default: fileHandler.
@@ -19,7 +21,7 @@ WADeploymentAwareFileHandler class >> install: fileHandler [
 	^ fileHandler
 ]
 
-{ #category : #Installing }
+{ #category : 'Installing' }
 WADeploymentAwareFileHandler class >> installAsFileHandlerAccordingTo: aDeploymentMode [
 
 	| libraries fileHandler |
@@ -29,7 +31,7 @@ WADeploymentAwareFileHandler class >> installAsFileHandlerAccordingTo: aDeployme
 	^ self install: fileHandler
 ]
 
-{ #category : #Installing }
+{ #category : 'Installing' }
 WADeploymentAwareFileHandler class >> installAsFileHandlerAccordingTo: aDeploymentMode servedAt: aURL [
 
 	| libraries fileHandler |
@@ -39,13 +41,13 @@ WADeploymentAwareFileHandler class >> installAsFileHandlerAccordingTo: aDeployme
 	^ self install: fileHandler
 ]
 
-{ #category : #'Instance Creation' }
+{ #category : 'Instance Creation' }
 WADeploymentAwareFileHandler class >> providing: aWAFileLibraryCollection [
 
 	^ self providing: aWAFileLibraryCollection baseUrlForLibraryOptional: Optional unused
 ]
 
-{ #category : #'private - Instance Creation' }
+{ #category : 'private - Instance Creation' }
 WADeploymentAwareFileHandler class >> providing: aWAFileLibraryCollection baseUrlForLibraryOptional: anOptional [
 
 	^ self new
@@ -53,27 +55,27 @@ WADeploymentAwareFileHandler class >> providing: aWAFileLibraryCollection baseUr
 		baseUrlForLibraryOptional: anOptional
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 WADeploymentAwareFileHandler >> baseUrlForLibrary [
 
 	^baseUrlForLibraryOptional withContentDo: [:url | url copy] ifUnused: [super baseUrlForLibrary]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 WADeploymentAwareFileHandler >> initialize [
 
 	super initialize.
 	libraries := #()
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 WADeploymentAwareFileHandler >> initializeProviding: aWALibraryCollection baseUrlForLibraryOptional: anOptional [
 
 	libraries := aWALibraryCollection.
 	baseUrlForLibraryOptional := anOptional
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 WADeploymentAwareFileHandler >> libraries [
 
 	^libraries 

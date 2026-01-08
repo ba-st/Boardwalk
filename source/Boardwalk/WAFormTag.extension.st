@@ -1,6 +1,6 @@
-Extension { #name : #WAFormTag }
+Extension { #name : 'WAFormTag' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 WAFormTag >> doNotSubmit [
 
 	self onSubmit: 'return false;'

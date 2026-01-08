@@ -2,18 +2,20 @@
 I represent a Willow Application Deployment mode. Currently I help in filtering file libraries to use according to the configured mode. 
 "
 Class {
-	#name : #WADeploymentMode,
-	#superclass : #Object,
-	#category : 'Boardwalk-WebApplication'
+	#name : 'WADeploymentMode',
+	#superclass : 'Object',
+	#category : 'Boardwalk-WebApplication',
+	#package : 'Boardwalk',
+	#tag : 'WebApplication'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 WADeploymentMode >> filter: allFileLibraryClasses [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 WADeploymentMode >> libraryFor: aWillowFileMetadataLibraryClass [
 
 	^ self subclassResponsibility 

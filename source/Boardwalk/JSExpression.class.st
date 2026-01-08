@@ -2,12 +2,14 @@
 A JS expression enclosed in parenthesis
 "
 Class {
-	#name : #JSExpression,
-	#superclass : #JSDecoration,
-	#category : 'Boardwalk-Javascript'
+	#name : 'JSExpression',
+	#superclass : 'JSDecoration',
+	#category : 'Boardwalk-Javascript',
+	#package : 'Boardwalk',
+	#tag : 'Javascript'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 JSExpression >> javascriptContentOn: aStream [
 
 	aStream nextPut: $(.

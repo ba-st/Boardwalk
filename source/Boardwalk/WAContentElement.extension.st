@@ -1,6 +1,6 @@
-Extension { #name : #WAContentElement }
+Extension { #name : 'WAContentElement' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 WAContentElement >> anonymousSubResourceIntegrity: theIntegrityMetadata [
 
 	self

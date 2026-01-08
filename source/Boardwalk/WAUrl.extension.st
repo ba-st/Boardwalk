@@ -1,6 +1,6 @@
-Extension { #name : #WAUrl }
+Extension { #name : 'WAUrl' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 WAUrl >> / aString [
 
 	^ self with: aString

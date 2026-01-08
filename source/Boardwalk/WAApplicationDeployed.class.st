@@ -2,18 +2,20 @@
 I represent a Willow Application as deployed.
 "
 Class {
-	#name : #WAApplicationDeployed,
-	#superclass : #WADeploymentMode,
-	#category : 'Boardwalk-WebApplication'
+	#name : 'WAApplicationDeployed',
+	#superclass : 'WADeploymentMode',
+	#category : 'Boardwalk-WebApplication',
+	#package : 'Boardwalk',
+	#tag : 'WebApplication'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 WAApplicationDeployed >> filter: aWALibraryCollection [
 
 	^ aWALibraryCollection select: [ :library | library subclasses isEmpty and: [ library isForDeployment ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 WAApplicationDeployed >> libraryFor: aWillowFileMetadataLibraryClass [
 
 	^ aWillowFileMetadataLibraryClass forDeployment

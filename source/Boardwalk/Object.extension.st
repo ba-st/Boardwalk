@@ -1,12 +1,12 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 Object >> asArrowFunction [
 
 	^self asArrowFunction: #()
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 Object >> asArrowFunction: aCollection [
 
 	^ JSArrowFunction new

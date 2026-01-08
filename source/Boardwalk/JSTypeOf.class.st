@@ -2,16 +2,18 @@
 Implements the Javascript typeOf  operator
 "
 Class {
-	#name : #JSTypeOf,
-	#superclass : #JSDecoration,
-	#category : #'Boardwalk-Javascript'
+	#name : 'JSTypeOf',
+	#superclass : 'JSDecoration',
+	#category : 'Boardwalk-Javascript',
+	#package : 'Boardwalk',
+	#tag : 'Javascript'
 }
 
-{ #category : #printing }
-JSTypeOf >> javascriptContentOn: aStream [
+{ #category : 'printing' }
+JSTypeOf >> javascriptContentOn: aRenderer [
 
-	aStream
-		nextPutAll: 'typeof';
-		space.
-	super javascriptContentOn: aStream
+	aRenderer document
+		identifier: 'typeof';
+		nextPut: Character space.
+	super javascriptContentOn: aRenderer
 ]

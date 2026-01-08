@@ -1,6 +1,6 @@
-Extension { #name : #JSObject }
+Extension { #name : 'JSObject' }
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> * anObject [ 
 	"Multiply the receiver and anObject"
 	
@@ -11,7 +11,7 @@ JSObject >> * anObject [
 				statement: anObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> + anObject [ 
 	"Add the receiver and anObject"
 	
@@ -22,19 +22,19 @@ JSObject >> + anObject [
 				statement: anObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> asExpression [
 
 	self addDecoration: JSExpression new
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> asImmediatelyInvokedFunctionExpression [
 
 	^ (self asFunction apply: #()) addDecoration: JSExpression new
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> collect: aBlock [
 
 	self
@@ -45,7 +45,7 @@ JSObject >> collect: aBlock [
 				yourself )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> detect: aBlock [
 
 	self
@@ -56,7 +56,7 @@ JSObject >> detect: aBlock [
 				yourself )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> detect: aBlock ifFound: foundBlock [
 
 	| thenScript |
@@ -77,7 +77,7 @@ JSObject >> detect: aBlock ifFound: foundBlock [
 		then: thenScript
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> detect: aBlock ifFound: foundBlock ifNone: errorBlock [
 
 	| thenScript elseScript |
@@ -100,7 +100,7 @@ JSObject >> detect: aBlock ifFound: foundBlock ifNone: errorBlock [
 		else: elseScript
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> detect: aBlock ifNone: errorBlock [
 
 	| thenScript |
@@ -120,7 +120,7 @@ JSObject >> detect: aBlock ifNone: errorBlock [
 		then: thenScript
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> equalTo: anObject [
 
 	self
@@ -130,7 +130,7 @@ JSObject >> equalTo: anObject [
 				statement: anObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> greaterThan: anObject [
 
 	self
@@ -140,7 +140,7 @@ JSObject >> greaterThan: anObject [
 				statement: anObject )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> greaterThanOrEqualTo: anObject [
 
 	self
@@ -150,7 +150,7 @@ JSObject >> greaterThanOrEqualTo: anObject [
 				statement: anObject )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> identicalTo: anObject [
 
 	self
@@ -160,7 +160,7 @@ JSObject >> identicalTo: anObject [
 				statement: anObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> javascript [
 
 	^ ( JSScript context: self renderContext )
@@ -168,7 +168,7 @@ JSObject >> javascript [
 		yourself
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> lessThan: anObject [
 
 	self
@@ -178,7 +178,7 @@ JSObject >> lessThan: anObject [
 				statement: anObject )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> lessThanOrEqualTo: anObject [
 
 	self
@@ -188,13 +188,13 @@ JSObject >> lessThanOrEqualTo: anObject [
 				statement: anObject )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> nonInlinedThen: anObject [
 
 	self addDecoration: (JSNonInlinedIfThenElse new trueStatement: anObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> nonInlinedThen: anObject else: anotherObject [
 
 	self
@@ -204,7 +204,7 @@ JSObject >> nonInlinedThen: anObject else: anotherObject [
 				falseStatement: anotherObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> notEqualTo: anObject [
 
 	self
@@ -214,7 +214,7 @@ JSObject >> notEqualTo: anObject [
 				statement: anObject )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> notIdenticalTo: anObject [
 
 	self
@@ -224,7 +224,7 @@ JSObject >> notIdenticalTo: anObject [
 				statement: anObject)
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> select: aBlock [
 
 	self
@@ -235,13 +235,13 @@ JSObject >> select: aBlock [
 				yourself )
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> sessionStorage [
 
 	^self alias: 'sessionStorage'
 ]
 
-{ #category : #'*Boardwalk' }
+{ #category : '*Boardwalk' }
 JSObject >> typeOf [
     "Returns the type of the receiver."
 
